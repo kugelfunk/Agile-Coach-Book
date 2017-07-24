@@ -23,6 +23,10 @@ Route::patch('/coaches/{user}', 'CoachesController@update');
 
 Route::post('/coaches', 'CoachesController@store');
 
+/**
+ * TEAMS
+ */
+
 Route::get('/teams', 'TeamsController@index');
 
 Route::get('/teams/create', 'TeamsController@create');
@@ -32,3 +36,27 @@ Route::post('/teams', 'TeamsController@store');
 Route::get('/teams/{team}/edit', 'TeamsController@edit');
 
 Route::patch('/teams/{team}', 'TeamsController@update');
+
+/**
+ * MEMBERS
+ */
+
+Route::get('/members', 'MembersController@index');
+
+Route::get('/members/create', 'MembersController@create');
+
+Route::post('/members', 'MembersController@store');
+
+Route::get('/members/{member}/edit', 'MembersController@edit');
+
+Route::patch('/members/{member}', 'MembersController@update');
+
+/**
+ * MEETINGS
+ */
+
+Route::get('/meetings', 'MeetingsController@index');
+
+Route::get('/meetings/create', 'MeetingsController@create');
+
+Route::post('/meetings', 'MeetingsController@store');

@@ -17,7 +17,7 @@ class CreateTeamsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('user_id')->unsigned()->index()->nullable();
-            $table->unsignedInteger('default_meeting_interval')->nullable();
+            $table->unsignedInteger('meeting_interval')->nullable();
             $table->timestamps();
         });
     }

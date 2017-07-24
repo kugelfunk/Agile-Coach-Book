@@ -17,8 +17,8 @@ class CreateMembersTable extends Migration
             $table->increments('id');
             $table->string('firstname');
             $table->string('lastname')->nullable();
-            $table->string('email')->nullable();
-            $table->integer('team_id')->unsigned()->index();
+            $table->string('email')->unique();
+            $table->integer('team_id')->unsigned()->index()->nullable();
             $table->unsignedInteger('meeting_interval')->nullable();
             $table->timestamps();
         });
