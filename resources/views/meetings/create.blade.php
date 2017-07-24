@@ -1,5 +1,20 @@
 @extends('layout')
 
+@section('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
+<style type="text/css">
+    .editor-toolbar {
+        color: #000;
+        text-shadow: none;
+        background-color: white;
+    }
+    #notes {
+        text-shadow: none;
+    }
+</style>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="w-form">
@@ -7,22 +22,24 @@
                 {{csrf_field()}}
                 <label for="date">Date and Time:</label>
                 <input class="w-input" id="date" maxlength="256" name="date"
-                       placeholder="Enter the date" type="text">
+                       placeholder="Enter the date" type="text" style="color: black;">
                 <label for="member">Member:</label>
                 <select name="member_id" id="member_id" class="w-select">
                     <option value="">Select...</option>
                     @foreach($members as $member)
-                        <option value="{{$member->id}}" @if(request('member_id') == $member->id) selected @endif>{{$member->firstname}}</option>
+                        <option value="{{$member->id}}"
+                                @if(request('member_id') == $member->id) selected @endif>{{$member->firstname}}</option>
                     @endforeach
                 </select>
                 <label for="user_id">Coach:</label>
                 <select name="user_id" id="user_id" class="w-select">
                     <option value="">Select...</option>
                     @foreach($users as $user)
-                        <option value="{{$user->id}}" @if(request('user_id') == $user->id) selected @endif>{{$user->name}}</option>
+                        <option value="{{$user->id}}"
+                                @if(request('user_id') == $user->id) selected @endif>{{$user->name}}</option>
                     @endforeach
                 </select>
-                <label for="email">Notes</label>
+                <label for="notes">Notes</label>
                 <textarea name="notes" id="notes" cols="30" rows="10" class="w-input"></textarea>
                 <input class="submit-button w-button" type="submit" value="Submit">
             </form>
@@ -32,8 +49,19 @@
 @endsection
 
 @section('body_javascripts')
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+    <script src="/js/jquery.datetimepicker.min.js"></script>
     <script type="text/javascript">
-      $(function () {
+      $(document).ready(function () {
+        // DateTimePicker
+        $('#date').datetimepicker({
+          format:'d.m.Y H:i',
+          step: 15
+        });
+
+        // Text Editor
+        var simplemde = new SimpleMDE();
       });
     </script>
 @endsection

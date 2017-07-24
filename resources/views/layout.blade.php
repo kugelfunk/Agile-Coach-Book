@@ -7,6 +7,7 @@
     <link href="/css/normalize.css" rel="stylesheet" type="text/css">
     <link href="/css/webflow.css" rel="stylesheet" type="text/css">
     <link href="/css/agile-coach-book.css" rel="stylesheet" type="text/css">
+    @yield('styles')
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
     <script type="text/javascript">WebFont.load({
         google: {
