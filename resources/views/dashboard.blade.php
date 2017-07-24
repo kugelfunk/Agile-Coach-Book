@@ -16,14 +16,14 @@
                 <h3>Members without Meetings</h3>
                 <ul>
                     @foreach($membersWithoutMeeting as $member)
-                        <li>{{$member->firstname}}</li>
+                        <li><a href="/meetings/create?member_id={{$member->id}}">{{$member->firstname}}</a></li>
                     @endforeach
                 </ul>
 
                 <h3>Members with Overdue Meetings</h3>
                 <ul>
                     @foreach($membersWithOverdueMeetings as $member)
-                        <li>{{$member->firstname}} ({{$member->overdue}})</li>
+                        <li><a href="/meetings/create?member_id={{$member->id}}">{{$member->firstname}} ({{$member->overdue}})</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -33,7 +33,7 @@
                 <h3>Upcoming Dates</h3>
                 <ul>
                     @foreach($dates as $date)
-                        <li>{{$date->date}} mit {{$date->firstname}}</li>
+                        <li><a href="/meetings/{{$date->id}}/edit">{{\Carbon\Carbon::parse($date->date)->format('d.m.Y H:i')}} mit {{$date->firstname}}</a> </li>
                     @endforeach
                 </ul>
             </div>

@@ -18,7 +18,7 @@ class CreateMeetingsTable extends Migration
             $table->dateTimeTz('date');
             $table->integer('coach_id')->unsigned()->index();
             $table->integer('member_id')->unsigned()->index();
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

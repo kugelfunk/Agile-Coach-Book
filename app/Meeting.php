@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Meeting extends Model
 {
-    public function coach()
+    public function user()
     {
-        return $this->belongsTo(Coach::class);
+        return $this->belongsTo(User::class);
     }
 
     public function member()
@@ -16,8 +16,5 @@ class Meeting extends Model
         return $this->belongsTo(Member::class);
     }
 
-    public function meeting()
-    {
-        return $this->belongsTo(Meeting::class);
-    }
+    protected $dates = ['date'];
 }

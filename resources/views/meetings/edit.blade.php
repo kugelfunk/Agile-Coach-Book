@@ -1,25 +1,26 @@
 @extends('layout')
 
 @section('styles')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-<link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
-<style type="text/css">
-    .editor-toolbar {
-        color: #000;
-        text-shadow: none;
-        background-color: white;
-    }
-    #notes {
-        text-shadow: none;
-    }
-</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
+    <style type="text/css">
+        .editor-toolbar {
+            color: #000;
+            text-shadow: none;
+            background-color: white;
+        }
+        #notes {
+            text-shadow: none;
+        }
+    </style>
 @endsection
 
 @section('content')
     <div class="container">
         <div class="w-form">
-            <form action="/meetings" method="POST">
+            <form action="/meetings/{{$meeting->id}}" method="POST">
                 {{csrf_field()}}
+                {{method_field('patch')}}
                 <label for="date">Date and Time:</label>
                 <input class="w-input" id="date" maxlength="256" name="date"
                        placeholder="Enter the date" type="text" style="color: black;">
@@ -27,8 +28,7 @@
                 <select name="member_id" id="member_id" class="w-select">
                     <option value="">Select...</option>
                     @foreach($members as $member)
-                        <option value="{{$member->id}}"
-                                @if(request('member_id') == $member->id) selected @endif>{{$member->firstname}}</option>
+                        <option value="{{$member->id}}" @if($meeting->member_id == $member->id) selected @endif>{{$member->firstname}}</option>
                     @endforeach
                 </select>
                 <label for="user_id">Coach:</label>
@@ -36,11 +36,11 @@
                     <option value="">Select...</option>
                     @foreach($users as $user)
                         <option value="{{$user->id}}"
-                                @if(request('user_id') == $user->id) selected @endif>{{$user->name}}</option>
+                                @if($meeting->user_id == $user->id) selected @endif>{{$user->name}}</option>
                     @endforeach
                 </select>
                 <label for="notes">Notes</label>
-                <textarea name="notes" id="notes" cols="30" rows="10" class="w-input"></textarea>
+                <textarea name="notes" id="notes" class="w-input">{{$meeting->notes}}</textarea>
                 <input class="submit-button w-button" type="submit" value="Submit">
             </form>
             @include('partials.errors')
@@ -56,10 +56,9 @@
       $(document).ready(function () {
         // DateTimePicker
         $('#date').datetimepicker({
+          value: "{{$meeting->date->format('d.m.Y H:i')}}",
           format:'d.m.Y H:i',
           minDate: new Date(Date.now()).toLocaleString(),
-          minTime: false,
-//          maxTime: '21:00',
           step: 15,
           dayOfWeekStart: 1
         });

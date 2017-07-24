@@ -337,9 +337,21 @@ th {
   text-align: left;
 }
 
+.CodeMirror {
+  text-shadow: none;
+}
+
+.CodeMirror, .CodeMirror-scroll {
+  min-height: 180px !important;
+}
+
+.CodeMirror a {
+  color: #333;
+}
+
 @media (max-width: 991px) {
   .header {
-    background-position: 170% 100%, 0% 0%;
+    background-position: 0% 0%;
   }
   .app-button.buy {
     margin-left: 10px;
@@ -366,7 +378,7 @@ th {
 @media (max-width: 767px) {
   .header {
     padding: 0px 10px 405px;
-    background-position: 0% 174%, 0% 0%;
+    background-position: 0% 0%;
   }
   .logo-wrapper {
     margin-bottom: 37px;
@@ -457,7 +469,7 @@ th {
 @media (max-width: 479px) {
   .header {
     padding-bottom: 506px;
-    background-position: 0% 117%, 0% 0%;
+    background-position: 0% 0%;
   }
   .section.sign-up {
     padding-top: 39px;

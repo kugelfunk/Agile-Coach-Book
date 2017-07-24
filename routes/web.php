@@ -60,3 +60,7 @@ Route::get('/meetings', 'MeetingsController@index');
 Route::get('/meetings/create', 'MeetingsController@create');
 
 Route::post('/meetings', 'MeetingsController@store');
+
+Route::get('/meetings/{meeting}/edit', 'MeetingsController@edit');
+
+Route::patch('/meetings/{meeting}', 'MeetingsController@update');
