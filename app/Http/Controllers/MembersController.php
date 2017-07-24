@@ -10,7 +10,7 @@ class MembersController extends Controller
 {
     public function index()
     {
-        $members = Member::all();
+        $members = Member::orderBy('firstname', 'ASC')->get();
         return view('members.index', compact('members'));
     }
 

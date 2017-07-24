@@ -9,7 +9,7 @@
                     <div class="w-icon-dropdown-toggle"></div>
                 </div>
                 <nav class="w-dropdown-list">
-                    <a class="w-dropdown-link" href="/coaches">List Coaches</a>
+                    <a class="w-dropdown-link" href="/coaches">All Coaches</a>
                     <a class="w-dropdown-link" href="/coaches/create">New Coach</a>
                 </nav>
             </div>
@@ -19,7 +19,7 @@
                     <div class="w-icon-dropdown-toggle"></div>
                 </div>
                 <nav class="w-dropdown-list">
-                    <a class="w-dropdown-link" href="/teams">List Teams</a>
+                    <a class="w-dropdown-link" href="/teams">All Teams</a>
                     <a class="w-dropdown-link" href="/teams/create">New Team</a>
                 </nav>
             </div>
@@ -29,7 +29,7 @@
                     <div class="w-icon-dropdown-toggle"></div>
                 </div>
                 <nav class="w-dropdown-list">
-                    <a class="w-dropdown-link" href="/members">List Members</a>
+                    <a class="w-dropdown-link" href="/members">All Members</a>
                     <a class="w-dropdown-link" href="/members/create">New Member</a>
                 </nav>
             </div>
