@@ -30,7 +30,7 @@
         </div>
         <div style="width: 32%; height: 200px; display: block; float: left; padding: 0 10px; margin: 10px 0;">
             <div class="card">
-                <h3>Upcoming Dates</h3>
+                <h3>Upcoming Meetings</h3>
                 <ul>
                     @foreach($dates as $date)
                         <li><a href="/meetings/{{$date->id}}/edit">{{\Carbon\Carbon::parse($date->date)->format('d.m.Y H:i')}} mit {{$date->firstname}}</a> </li>

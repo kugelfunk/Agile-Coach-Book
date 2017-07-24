@@ -37,7 +37,8 @@ class CoachesController extends Controller
         // prepare upcoming dates
         $dates = DB::select(DB::raw('SELECT meetings.id, meetings.date, members.firstname from meetings, members
             where meetings.member_id = members.id
-            and meetings.date > NOW()'));
+            and meetings.date > NOW()
+            ORDER BY meetings.date ASC'));
 
         // prepare tasks
 
