@@ -10,6 +10,11 @@ use Carbon\Carbon;
 
 class MeetingsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.basic');
+    }
+
     public function index()
     {
         $meetings = Meeting::whereDate('date', '>=', date('Y-m-d'))->orderBy('date', 'asc')->get();

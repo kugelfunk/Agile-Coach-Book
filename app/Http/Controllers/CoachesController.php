@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class CoachesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.basic');
+    }
+
     public function dashboard()
     {
         // prepare overdue meetings

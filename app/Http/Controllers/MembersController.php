@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class MembersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.basic');
+    }
+
     public function index()
     {
         $members = Member::orderBy('firstname', 'ASC')->get();
