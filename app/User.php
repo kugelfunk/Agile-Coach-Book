@@ -11,17 +11,17 @@ class User extends Authenticatable
 
     public function teams()
     {
-        $this->hasMany(Team::class);
+        return $this->hasMany(Team::class);
     }
 
     public function meetings()
     {
-        $this->hasMany(Meeting::class);
+        return $this->hasMany(Meeting::class);
     }
 
     public function tasks()
     {
-        $this->hasMany(Task::class);
+        return $this->hasMany(Task::class);
     }
 
     /**
