@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Turbine Kreuzberg - Agile Coach Book</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="/css/normalize.css" rel="stylesheet" type="text/css">
     <link href="/css/webflow.css" rel="stylesheet" type="text/css">
     <link href="/css/agile-coach-book.css" rel="stylesheet" type="text/css">

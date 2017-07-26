@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        @include('partials.errors')
         <div class="w-form">
             <form action="/coaches" method="POST">
                 {{csrf_field()}}
@@ -15,7 +16,6 @@
                 <input class="w-input" id="password" maxlength="256" name="password" placeholder="Enter your password" type="password">
                 <input class="submit-button w-button" type="submit" value="Submit">
             </form>
-            @include('partials.errors')
         </div>
     </div>
 @endsection

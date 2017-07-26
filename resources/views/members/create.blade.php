@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <div class="w-form">
+            @include('partials.errors')
             <form action="/members" method="POST">
                 {{csrf_field()}}
                 <label for="name">First Name:</label>
@@ -35,7 +36,6 @@
                 </select>
                 <input class="submit-button w-button" type="submit" value="Submit">
             </form>
-            @include('partials.errors')
         </div>
     </div>
 @endsection

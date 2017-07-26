@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <div class="w-form">
+            @include('partials.errors')
             <form action="/members/{{$member->id}}" method="POST">
                 {{method_field('patch')}}
                 {{csrf_field()}}
@@ -36,7 +37,6 @@
                 </select>
                 <input class="submit-button w-button" type="submit" value="Submit">
             </form>
-            @include('partials.errors')
         </div>
     </div>
 @endsection

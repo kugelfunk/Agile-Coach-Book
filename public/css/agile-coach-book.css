@@ -3,6 +3,12 @@ body {
   color: #333;
   font-size: 14px;
   line-height: 20px;
+  background-color: #482D20;
+  background-image: url('../images/donzo_15.jpg');
+  background-position: 0% 0%;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 h1 {
@@ -60,17 +66,10 @@ p {
 .header {
   padding-top: 0px;
   padding-bottom: 236px;
-  background-image: url('../images/donzo_15.jpg');
-  background-position: 0% 0%;
-  background-size: cover;
-  background-repeat: no-repeat;
+
   color: #fff;
   text-shadow: 1px 1px 6px rgba(0, 0, 0, .37), 0 1px 0 rgba(0, 0, 0, .49);
   height: 100vh;
-}
-
-.bars-wrapper {
-  background-color: #3e352a;
 }
 
 .logo-wrapper {
@@ -100,63 +99,9 @@ p {
   line-height: 21px;
 }
 
-.app-button {
-  margin-right: 14px;
-  padding: 8px 13px;
-  border-radius: 6px;
-  background-color: #000;
-  -webkit-transition: background-color 300ms ease;
-  transition: background-color 300ms ease;
-}
-
-.app-button:hover {
-  background-color: #84a6ba;
-}
-
-.app-button.buy {
-  margin-right: 0px;
-  margin-left: 19px;
-  background-color: #5d6779;
-}
-
-.app-button.buy:hover {
-  background-color: #000;
-}
-
 .section {
   padding-top: 110px;
   padding-bottom: 110px;
-}
-
-.section.grey {
-  background-color: #f0f3f5;
-}
-
-.section.grey.buy {
-  padding-top: 62px;
-  padding-bottom: 62px;
-}
-
-.section.map {
-  position: relative;
-  padding-top: 184px;
-  padding-bottom: 184px;
-  background-image: url('../images/map.png');
-  background-position: 50% 50%;
-  background-size: cover;
-}
-
-.section.footer {
-  padding-top: 57px;
-  padding-bottom: 57px;
-  background-color: #262b2f;
-  color: #b5bbc8;
-}
-
-.section.sign-up {
-  padding-top: 46px;
-  padding-bottom: 46px;
-  background-color: #5d6779;
 }
 
 .center-title {
@@ -196,60 +141,8 @@ p {
   margin-bottom: -110px;
 }
 
-.buy-title {
-  margin-top: 6px;
-  color: #5d6779;
-  font-size: 33px;
-  font-weight: 300;
-}
-
 .align-right {
   text-align: right;
-}
-
-.location-title {
-  color: #fff;
-}
-
-.map-icon {
-  position: absolute;
-  left: 43%;
-  bottom: 39%;
-}
-
-.footer-left-col {
-  padding-top: 8px;
-}
-
-.footer-right-col {
-  text-align: right;
-}
-
-.footer-logo {
-  margin-top: -3px;
-  margin-right: 11px;
-  float: left;
-}
-
-.footer-text {
-  font-size: 16px;
-}
-
-.footer-link {
-  width: 40px;
-  height: 40px;
-  margin-right: 6px;
-  margin-left: 6px;
-  padding-top: 9px;
-  border-radius: 100%;
-  background-color: #5d6779;
-  -webkit-transition: background-color 300ms ease;
-  transition: background-color 300ms ease;
-  text-align: center;
-}
-
-.footer-link:hover {
-  background-color: #6c5c4f;
 }
 
 .field {
@@ -328,6 +221,10 @@ p {
   font-weight: bold;
 }
 
+.w-form-fail {
+  margin: 10px 0;
+}
+
 .container {
   display: block;
   max-width: 500px;
@@ -349,7 +246,7 @@ a {
 }
 
 td, th {
-  padding: 5px;
+  padding: 5px 20px 5px 0;
 }
 
 th {
@@ -382,23 +279,21 @@ th {
   color: #333;
 }
 
+.card .w-dropdown-list {
+  background-color: #e6e6e6;
+}
+
+.card .w-dropdown-link.w--current {
+  color: #333;
+  font-weight: bold;
+}
+
 @media (max-width: 991px) {
   .header {
     background-position: 0% 0%;
   }
-  .app-button.buy {
-    margin-left: 10px;
-    padding: 5px 9px;
-  }
-  .subtitle {
-    margin-bottom: 52px;
-  }
-  .image-crop {
-    height: 605px;
-  }
-  .buy-title {
-    font-size: 26px;
-    line-height: 26px;
+  .navbar {
+    margin-bottom: 70px;
   }
   .nav-menu {
     background-color: rgba(0, 0, 0, .7);
@@ -413,40 +308,16 @@ th {
     padding: 0px 10px 405px;
     background-position: 0% 0%;
   }
+  .navbar {
+    margin-bottom: 0px;
+  }
   .logo-wrapper {
     margin-bottom: 37px;
-  }
-  .main-subtitle {
-    width: 84%;
-    margin-bottom: 41px;
-  }
-  .app-button {
-    margin-bottom: 14px;
-  }
-  .app-button.buy {
-    margin-right: 13px;
-    margin-left: 13px;
   }
   .section {
     padding-top: 42px;
     padding-bottom: 42px;
     text-align: center;
-  }
-  .section.grey.buy {
-    padding-top: 42px;
-    padding-bottom: 42px;
-  }
-  .section.map {
-    padding-top: 52px;
-    padding-bottom: 52px;
-  }
-  .section.footer {
-    padding-top: 28px;
-    padding-bottom: 28px;
-  }
-  .section.sign-up {
-    padding-right: 10px;
-    padding-left: 10px;
   }
   .center-title {
     padding-right: 10px;
@@ -462,30 +333,11 @@ th {
     display: block;
     margin: 32px auto;
   }
-  .image-crop {
-    height: auto;
-    margin-bottom: 0px;
-  }
-  .buy-title {
-    margin-bottom: 31px;
-  }
   .align-right {
     text-align: center;
   }
   .map-icon {
     position: static;
-  }
-  .footer-right-col {
-    text-align: center;
-  }
-  .footer-logo {
-    margin-top: -1px;
-    margin-right: 0px;
-    margin-bottom: 8px;
-    float: none;
-  }
-  .footer-text {
-    margin-bottom: 22px;
   }
   .image {
     width: 269px;
@@ -503,10 +355,6 @@ th {
   .header {
     padding-bottom: 506px;
     background-position: 0% 0%;
-  }
-  .section.sign-up {
-    padding-top: 39px;
-    padding-bottom: 39px;
   }
   .field {
     width: 100%;

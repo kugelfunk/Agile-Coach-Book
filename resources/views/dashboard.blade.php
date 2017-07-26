@@ -11,8 +11,7 @@
                             <li><a href="/meetings/create?member_id={{$member->id}}">{{$member->firstname}}</a></li>
                         @endforeach
                     </ul>
-                    <hr style="margin: 20px 0;">
-                    <h3>Members with Due Meetings</h3>
+                    <h3 style="margin-top: 30px;">Members with Due Meetings</h3>
                     <ul>
                         @foreach($membersWithOverdueMeetings as $member)
                             <li><a href="/meetings/create?member_id={{$member->id}}">{{$member->firstname}}

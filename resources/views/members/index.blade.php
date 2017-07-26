@@ -3,8 +3,20 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <h3>All Members</h3>
-            <table>
+            <h3 style="float: left;">All Members</h3>
+            <div class="dropdown w-dropdown" data-delay="0" data-hover="1" style="float: right;">
+                <div class="dropdown-toggle w-dropdown-toggle">
+                    <div>Team Filter</div>
+                    <div class="w-icon-dropdown-toggle"></div>
+                </div>
+                <nav class="w-dropdown-list">
+                    <a class="w-dropdown-link" href="/members">All teams</a>
+                    @foreach($teams as $team)
+                        <a class="w-dropdown-link" href="/members?team_id={{$team->id}}">{{$team->name}}</a>
+                    @endforeach
+                </nav>
+            </div>
+            <table style="clear: both;">
                 <thead>
                 <tr>
                     <th>Name</th>

@@ -15,8 +15,15 @@ class MembersController extends Controller
 
     public function index()
     {
-        $members = Member::orderBy('firstname', 'ASC')->get();
-        return view('members.index', compact('members'));
+        $teams = Team::all();
+
+        $team_id = request('team_id');
+        if (isset($team_id)) {
+            $members = Member::where('team_id', $team_id)->orderBy('firstname', 'ASC')->get();
+        } else {
+            $members = Member::orderBy('firstname', 'ASC')->get();
+        }
+        return view('members.index', compact('members', 'teams'));
     }
 
     public function create()
@@ -53,7 +60,7 @@ class MembersController extends Controller
 
         $this->validate(request(), [
             'firstname' => 'required|min:2',
-            'email' => 'required|email|unique:members,email,'.$member->id
+            'email' => 'required|email|unique:members,email,' . $member->id
         ]);
 
         $member->firstname = \request('firstname');

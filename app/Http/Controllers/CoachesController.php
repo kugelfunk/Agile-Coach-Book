@@ -13,24 +13,14 @@ class CoachesController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('auth.basic');
+        $this->middleware('auth.basic');
     }
 
     public function dashboard()
     {
         // prepare overdue meetings
-        $overdueMeetings = [
-            [
-                'member' => "Bernd",
-                'days' => 12
-            ],
-            [
-                'member' => "Matthias",
-                'days' => 17
-            ]
-        ];
 
-        $membersWithoutMeeting = DB::select(DB::raw('SELECT members.id, members.firstname FROM members WHERE members.id NOT IN (SELECT member_id FROM meetings)'));
+        $membersWithoutMeeting = DB::select(DB::raw('SELECT members.id, members.firstname FROM members WHERE members.id NOT IN (SELECT member_id FROM meetings) ORDER BY members.firstname'));
 
         // Check https://github.com/laravel/framework/issues/14997
         $membersWithOverdueMeetings = DB::select(DB::raw('SELECT members.id, members.firstname, (DATEDIFF(NOW(), dates.date)-members.meeting_interval) as overdue
@@ -52,7 +42,7 @@ class CoachesController extends Controller
 
     public function index()
     {
-        $coaches = User::all();
+        $coaches = User::orderBy('name')->get();
 
         return view('coaches.index', compact('coaches'));
     }

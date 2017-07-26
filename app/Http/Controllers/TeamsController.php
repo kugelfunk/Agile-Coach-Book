@@ -15,7 +15,7 @@ class TeamsController extends Controller
 
     public function index()
     {
-        $teams = Team::all();
+        $teams = Team::orderBy('name')->get();
 
         return view('teams.index', compact('teams'));
     }
@@ -50,6 +50,11 @@ class TeamsController extends Controller
 
     public function update(Team $team, Request $request)
     {
+        $this->validate(\request(), [
+            'name' => 'required|min:2',
+            'meeting_interval' => 'required|integer'
+        ]);
+
         $team->name = $request->name;
         $team->user_id = $request->user_id;
         $team->meeting_interval = $request->meeting_interval;
