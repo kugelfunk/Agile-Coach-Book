@@ -15,7 +15,9 @@ class MembersController extends Controller
 
     public function index()
     {
-        $teams = Team::all();
+        $teams = Team::orderBy('name')->get();
+
+        $currentTeam = Team::find(request('team_id'));
 
         $team_id = request('team_id');
         if (isset($team_id)) {
@@ -23,7 +25,7 @@ class MembersController extends Controller
         } else {
             $members = Member::orderBy('firstname', 'ASC')->get();
         }
-        return view('members.index', compact('members', 'teams'));
+        return view('members.index', compact('members', 'teams', 'currentTeam'));
     }
 
     public function create()

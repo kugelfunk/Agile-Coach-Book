@@ -20,7 +20,7 @@ class CoachesController extends Controller
     {
         // prepare overdue meetings
 
-        $membersWithoutMeeting = DB::select(DB::raw('SELECT members.id, members.firstname FROM members WHERE members.id NOT IN (SELECT member_id FROM meetings) ORDER BY members.firstname'));
+        $membersWithoutMeeting = DB::select(DB::raw('SELECT members.id, members.firstname FROM members WHERE members.id NOT IN (SELECT member_id FROM meetings) AND members.meeting_interval > 0 ORDER BY members.firstname'));
 
         // Check https://github.com/laravel/framework/issues/14997
         $membersWithOverdueMeetings = DB::select(DB::raw('SELECT members.id, members.firstname, (DATEDIFF(NOW(), dates.date)-members.meeting_interval) as overdue

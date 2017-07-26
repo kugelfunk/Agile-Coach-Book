@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Member;
 use App\Team;
 use App\User;
 use Illuminate\Http\Request;
@@ -59,6 +60,12 @@ class TeamsController extends Controller
         $team->user_id = $request->user_id;
         $team->meeting_interval = $request->meeting_interval;
         $team->update();
+
+        // Update individual meeting intervals if checbox is clicked
+        if ($request->has('reset_intervals')) {
+            Member::where('team_id', $team->id)->update(['meeting_interval' => $team->meeting_interval]);
+        }
+
         return redirect('/teams');
     }
 }

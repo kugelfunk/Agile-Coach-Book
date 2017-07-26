@@ -34,6 +34,7 @@
                     <option value="60" @if($member->meeting_interval == 60) selected @endif>2 months</option>
                     <option value="90" @if($member->meeting_interval == 90) selected @endif>3 months</option>
                     <option value="180" @if($member->meeting_interval == 180) selected @endif>6 months</option>
+                    <option value="0" @if($member->meeting_interval == 0) selected @endif>Never</option>
                 </select>
                 <input class="submit-button w-button" type="submit" value="Submit">
             </form>

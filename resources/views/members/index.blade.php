@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <h3 style="float: left;">All Members</h3>
+            <h3 style="float: left;">All Members @if(isset($currentTeam)){{$currentTeam->name}}@endif</h3>
             <div class="dropdown w-dropdown" data-delay="0" data-hover="1" style="float: right;">
                 <div class="dropdown-toggle w-dropdown-toggle">
                     <div>Team Filter</div>

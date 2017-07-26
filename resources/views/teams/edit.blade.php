@@ -27,7 +27,12 @@
                     <option value="60" @if($team->meeting_interval == 60) selected @endif>2 months</option>
                     <option value="90" @if($team->meeting_interval == 90) selected @endif>3 months</option>
                     <option value="180" @if($team->meeting_interval == 180) selected @endif>6 months</option>
+                    <option value="0" @if($team->meeting_interval == 0) selected @endif>Never</option>
                 </select>
+                <div class="w-checkbox">
+                    <input class="w-checkbox-input" id="reset_intervals" name="reset_intervals" type="checkbox">
+                    <label class="w-form-label" for="reset_intervals">Reset individual meeting intervals</label>
+                </div>
                 <input class="submit-button w-button" type="submit" value="Submit">
             </form>
         </div>
