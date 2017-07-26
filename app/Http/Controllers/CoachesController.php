@@ -85,7 +85,13 @@ class CoachesController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $user->update($request->all());
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if (isset($request->password)) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->update();
 
         return redirect('/coaches');
     }
