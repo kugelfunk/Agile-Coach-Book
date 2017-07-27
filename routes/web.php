@@ -98,3 +98,59 @@ Route::get('/ical/{meeting}', function(\App\Meeting $meeting){
 
     echo $cal->render();
 });
+
+/**
+ * Mail Test
+ */
+Route::get('/mailtest', function(){
+    mail("mlehmann@gmx.de", "Der Mail Test aus Laravel", "Hier die Message...", "From: martin@martinlehmann.com");
+    return redirect('/');
+});
+
+Route::get('/cron', function () {
+    function get_client_ip() {
+        $ipaddress = '';
+        if (getenv('HTTP_CLIENT_IP'))
+            $ipaddress = getenv('HTTP_CLIENT_IP');
+        else if(getenv('HTTP_X_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+        else if(getenv('HTTP_X_FORWARDED'))
+            $ipaddress = getenv('HTTP_X_FORWARDED');
+        else if(getenv('HTTP_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_FORWARDED_FOR');
+        else if(getenv('HTTP_FORWARDED'))
+            $ipaddress = getenv('HTTP_FORWARDED');
+        else if(getenv('REMOTE_ADDR'))
+            $ipaddress = getenv('REMOTE_ADDR');
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
+    }
+//    return "IP: " . get_client_ip();
+    mail("mlehmann@gmx.de", "Cron call von: " . get_client_ip() , "Keine Message hier", "From: martin@martinlehmann.com");
+
+});
+
+Route::get('/scheduler', function(){
+    function get_client_ip() {
+        $ipaddress = '';
+        if (getenv('HTTP_CLIENT_IP'))
+            $ipaddress = getenv('HTTP_CLIENT_IP');
+        else if(getenv('HTTP_X_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+        else if(getenv('HTTP_X_FORWARDED'))
+            $ipaddress = getenv('HTTP_X_FORWARDED');
+        else if(getenv('HTTP_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_FORWARDED_FOR');
+        else if(getenv('HTTP_FORWARDED'))
+            $ipaddress = getenv('HTTP_FORWARDED');
+        else if(getenv('REMOTE_ADDR'))
+            $ipaddress = getenv('REMOTE_ADDR');
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
+    }
+    mail("mlehmann@gmx.de", "Cron call von: " . get_client_ip() , "Keine Message hier", "From: martin@martinlehmann.com");
+})->middleware('auth.basic');
+
+
