@@ -64,3 +64,16 @@ Route::post('/meetings', 'MeetingsController@store');
 Route::get('/meetings/{meeting}/edit', 'MeetingsController@edit');
 
 Route::patch('/meetings/{meeting}', 'MeetingsController@update');
+
+/**
+ * Authentication
+ */
+
+Route::get('/logout', function(){
+    Auth::logout();
+    return back();
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

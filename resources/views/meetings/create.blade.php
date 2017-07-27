@@ -37,7 +37,7 @@
                     <option value="">Select...</option>
                     @foreach($users as $user)
                         <option value="{{$user->id}}"
-                                @if(request('user_id') == $user->id) selected @endif>{{$user->name}}</option>
+                                @if(Auth::user()->id == $user->id) selected @endif>{{$user->name}} {{$user->lastname}}</option>
                     @endforeach
                 </select>
                 <label for="notes">Notes</label>

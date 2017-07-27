@@ -13,7 +13,7 @@
                 <select class="w-select" name="user_id" id="user_id">
                     <option value="">No coach yet</option>
                     @foreach($coaches as $coach)
-                        <option value="{{$coach->id}}">{{$coach->name}}</option>
+                        <option value="{{$coach->id}}">{{$coach->name}} {{$coach->lastname}}</option>
                     @endforeach
                 </select>
                 <label for="meeting_interval">Default Meeting Interval:</label>

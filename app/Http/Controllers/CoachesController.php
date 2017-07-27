@@ -6,6 +6,7 @@ use App\Coach;
 use App\User;
 use Barryvdh\Debugbar\Middleware\Debugbar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -13,18 +14,21 @@ class CoachesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth.basic');
+        $this->middleware('auth');
     }
 
     public function dashboard()
     {
         // prepare overdue meetings
 
-        $membersWithoutMeeting = DB::select(DB::raw('SELECT members.id, members.firstname FROM members WHERE members.id NOT IN (SELECT member_id FROM meetings) AND members.meeting_interval > 0 ORDER BY members.firstname'));
+        $membersWithoutMeeting = DB::select(DB::raw('SELECT members.id, members.firstname FROM members INNER JOIN teams ON members.team_id = teams.id INNER JOIN users ON teams.user_id = users.id WHERE members.id NOT IN (SELECT member_id FROM meetings) AND users.id = ' . Auth::id() .' AND members.meeting_interval > 0 ORDER BY members.firstname'));
+//        $membersWithoutMeeting = DB::select(DB::raw('SELECT members.id, members.firstname FROM members, teams, users WHERE members.id NOT IN (SELECT member_id FROM meetings) AND members.team_id = teams.id AND teams.user_id = ' . Auth::user()->id . ' AND members.meeting_interval > 0 ORDER BY members.firstname'));
 
         // Check https://github.com/laravel/framework/issues/14997
         $membersWithOverdueMeetings = DB::select(DB::raw('SELECT members.id, members.firstname, (DATEDIFF(NOW(), dates.date)-members.meeting_interval) as overdue
-          FROM members, (SELECT max(date) as date, member_id FROM meetings GROUP BY member_id) dates
+          FROM (SELECT members.id, members.firstname, members.meeting_interval FROM members INNER JOIN teams ON members.team_id = teams.id
+          INNER JOIN users ON teams.user_id = users.id WHERE users.id = ' . Auth::id() . ') members, 
+          (SELECT max(date) as date, member_id FROM meetings GROUP BY member_id) dates
           WHERE members.id = dates.member_id
           AND ((DATEDIFF(NOW(), dates.date)-members.meeting_interval)) > 0
           ORDER BY overdue DESC'));
@@ -55,12 +59,13 @@ class CoachesController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'firstname' => 'required|min:3',
+            'firstname' => 'required|min:2',
             'email' => 'required|email',
-            'password' => 'required|min:4'
+            'password' => 'required|min:6'
         ]);
         $coach = new User();
-        $coach->name = request('firstname') . " " . \request('lastname');
+        $coach->name = request('firstname');
+        $coach->lastname = request('lastname');
         $coach->email = request('email');
         $coach->password = bcrypt(request('password'));
         $coach->save();
@@ -75,10 +80,18 @@ class CoachesController extends Controller
 
     public function update(Request $request, User $user)
     {
+        $this->validate(request(), [
+            'name' => 'required|min:2',
+            'email' => 'required|email'
+        ]);
         $user->name = $request->name;
+        $user->lastname = $request->lastname;
         $user->email = $request->email;
 
         if (isset($request->password)) {
+            $this->validate(request(), [
+                'password' => 'min:6'
+            ]);
             $user->password = bcrypt($request->password);
         }
         $user->update();

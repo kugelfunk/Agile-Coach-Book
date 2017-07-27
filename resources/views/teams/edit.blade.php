@@ -14,7 +14,7 @@
                 <select class="w-select" name="user_id" id="user_id">
                     <option value="">No coach</option>
                     @foreach($coaches as $coach)
-                        <option value="{{$coach->id}}" @if($team->user_id == $coach->id)selected @endif>{{$coach->name}}</option>
+                        <option value="{{$coach->id}}" @if($team->user_id == $coach->id)selected @endif>{{$coach->name}} {{$coach->lastname}}</option>
                     @endforeach
                 </select>
                 <label for="meeting_interval">Default Meeting Interval:</label>

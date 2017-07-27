@@ -4,7 +4,8 @@ body {
   font-size: 14px;
   line-height: 20px;
   background-color: #482D20;
-  background-image: url('../images/donzo_15.jpg');
+  background-image: url('../images/faro_night2.jpg');
+  /*background-image: url('../images/donzo_15.jpg');*/
   background-position: 0% 0%;
   background-attachment: fixed;
   background-size: cover;
@@ -291,6 +292,27 @@ th {
 .card .w-dropdown-link.w--current {
   color: #333;
   font-weight: bold;
+}
+
+.utility-page-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  max-height: 100%;
+  max-width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #ffffff;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, .37), 0 1px 0 rgba(0, 0, 0, .49);
 }
 
 @media (max-width: 991px) {

@@ -1,6 +1,6 @@
 <div class="navbar w-nav" data-animation="over-right" data-collapse="medium" data-duration="400">
     <div class="w-container">
-        <a class="w-nav-brand" href="#"></a>
+        <a class="w-nav-brand" href="/">Turbine Kreuzberg</a>
         <nav class="nav-menu w-nav-menu" role="navigation">
             <a class="nav-link w-nav-link" href="/">Home</a>
             <div class="w-dropdown" data-delay="0" data-hover="1">
@@ -43,7 +43,13 @@
                     <a class="w-dropdown-link" href="/meetings/create">New Meeting</a>
                 </nav>
             </div>
-            <a class="nav-link w-nav-link" href="#">Tasks</a></nav>
+            <a class="nav-link w-nav-link" href="#">Tasks</a>
+            @if (Auth::check())
+                <a class="nav-link w-nav-link" href="/logout">Logout {{Auth::user()->name}}</a>
+            @else
+                <a class="nav-link w-nav-link" href="/login">Login / Register</a>
+            @endif
+        </nav>
         <div class="menu-button w-nav-button">
             <div class="w-icon-nav-menu"></div>
         </div>
