@@ -37,6 +37,7 @@ class TeamsController extends Controller
         $team = new Team();
         $team->name = \request('name');
         $team->user_id = \request('user_id');
+        $team->notes = \request('notes');
         $team->meeting_interval = \request('meeting_interval');
         $team->save();
 
@@ -58,6 +59,7 @@ class TeamsController extends Controller
 
         $team->name = $request->name;
         $team->user_id = $request->user_id;
+        $team->notes = $request->notes;
         $team->meeting_interval = $request->meeting_interval;
         $team->update();
 

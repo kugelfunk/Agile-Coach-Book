@@ -10,7 +10,7 @@
                     <th>Member</th>
                     <th>Coach</th>
                     <th>Date</th>
-                    <th>Info</th>
+                    <th>Export</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -19,7 +19,7 @@
                         <td><a href="/meetings/{{$meeting->id}}/edit">{{$meeting->member->firstname}}</a></td>
                         <td>{{$meeting->user->name}}</td>
                         <td>{{$meeting->date->format('d.m.Y, H:i')}}</td>
-                        <td></td>
+                        <td><a href="/ical/{{$meeting->id}}">iCal</a></td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -31,7 +31,6 @@
                     <th>Member</th>
                     <th>Coach</th>
                     <th>Date</th>
-                    <th>Info</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,7 +39,6 @@
                         <td><a href="/meetings/{{$meeting->id}}/edit">{{$meeting->member->firstname}}</a></td>
                         <td>{{$meeting->user->name}}</td>
                         <td>{{$meeting->date->format('d.m.Y, H:i')}}</td>
-                        <td></td>
                     </tr>
                 @endforeach
                 </tbody>

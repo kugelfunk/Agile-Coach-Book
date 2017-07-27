@@ -1,5 +1,20 @@
 @extends('layout')
 
+@section('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <style type="text/css">
+        .editor-toolbar {
+            color: #000;
+            text-shadow: none;
+            background-color: white;
+        }
+
+        #notes {
+            text-shadow: none;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="w-form">
@@ -28,8 +43,34 @@
                     <option value="180">6 months</option>
                     <option value="0">Never</option>
                 </select>
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="notes" rows="5" class="w-input"></textarea>
                 <input class="submit-button w-button" type="submit" value="Submit">
             </form>
         </div>
     </div>
+@endsection
+
+@section('body_javascripts')
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+    <script src="/js/jquery.datetimepicker.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        // Text Editor
+        var simplemde = new SimpleMDE({
+          spellChecker: false,
+          status: false,
+          toolbar: [
+            "bold",
+            "heading",
+            "ordered-list",
+            "unordered-list",
+            "table",
+            "link",
+            "preview"
+          ]
+        });
+      });
+    </script>
 @endsection

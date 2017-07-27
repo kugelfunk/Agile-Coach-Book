@@ -40,6 +40,8 @@ class MeetingsController extends Controller
 
         $meeting = new Meeting();
         $meeting->date = Carbon::parse(\request('date'));
+
+//        return $meeting->date . " -> " . $meeting->date->addMinutes(30);
         $meeting->user_id = \request('user_id');
         $meeting->member_id = \request('member_id');
         $meeting->notes = \request('notes');

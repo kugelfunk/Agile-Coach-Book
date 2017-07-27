@@ -16,6 +16,7 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->text('notes')->nullable();
             $table->integer('user_id')->unsigned()->index()->nullable();
             $table->unsignedInteger('meeting_interval')->nullable();
             $table->timestamps();

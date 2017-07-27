@@ -41,7 +41,7 @@
                     @endforeach
                 </select>
                 <label for="notes">Notes</label>
-                <textarea name="notes" id="notes" cols="30" rows="10" class="w-input"></textarea>
+                <textarea name="notes" id="notes" class="w-input"></textarea>
                 <input class="submit-button w-button" type="submit" value="Submit">
             </form>
         </div>

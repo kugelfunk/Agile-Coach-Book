@@ -76,4 +76,25 @@ Route::get('/logout', function(){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+/**
+ * iCal
+ */
+
+Route::get('/ical/{meeting}', function(\App\Meeting $meeting){
+    date_default_timezone_set('Europe/Berlin');
+
+    $cal = new \Eluceo\iCal\Component\Calendar('acb.martinlehmann.com');
+
+    $evt = new \Eluceo\iCal\Component\Event();
+
+    $evt->setDtStart($meeting->date);
+    $evt->setDtEnd($meeting->date->addMinutes(30));
+    $evt->setSummary("Feedback Meeting " . $meeting->member->firstname . " + " . $meeting->user->name);
+    $evt->setUseTimezone(true);
+    $cal->addComponent($evt);
+
+    header('Content-Type: text/calendar; charset=utf-8');
+    header('Content-Disposition: attachment; filename="cal.ics"');
+
+    echo $cal->render();
+});

@@ -1,5 +1,20 @@
 @extends('layout')
 
+@section('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <style type="text/css">
+        .editor-toolbar {
+            color: #000;
+            text-shadow: none;
+            background-color: white;
+        }
+
+        #notes {
+            text-shadow: none;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="w-form">
@@ -14,7 +29,8 @@
                 <select class="w-select" name="user_id" id="user_id">
                     <option value="">No coach</option>
                     @foreach($coaches as $coach)
-                        <option value="{{$coach->id}}" @if($team->user_id == $coach->id)selected @endif>{{$coach->name}} {{$coach->lastname}}</option>
+                        <option value="{{$coach->id}}"
+                                @if($team->user_id == $coach->id)selected @endif>{{$coach->name}} {{$coach->lastname}}</option>
                     @endforeach
                 </select>
                 <label for="meeting_interval">Default Meeting Interval:</label>
@@ -33,8 +49,34 @@
                     <input class="w-checkbox-input" id="reset_intervals" name="reset_intervals" type="checkbox">
                     <label class="w-form-label" for="reset_intervals">Reset individual meeting intervals</label>
                 </div>
+                <label for="notes">Notes</label>
+                <textarea name="notes" id="notes" rows="5" class="w-input">{{$team->notes}}</textarea>
                 <input class="submit-button w-button" type="submit" value="Submit">
             </form>
         </div>
     </div>
+@endsection
+
+@section('body_javascripts')
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+    <script src="/js/jquery.datetimepicker.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        // Text Editor
+        var simplemde = new SimpleMDE({
+          spellChecker: false,
+          status: false,
+          toolbar: [
+            "bold",
+            "heading",
+            "ordered-list",
+            "unordered-list",
+            "table",
+            "link",
+            "preview"
+          ]
+        });
+      });
+    </script>
 @endsection
