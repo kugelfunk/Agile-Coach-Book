@@ -6,7 +6,8 @@ use App\Coach;
 use App\User;
 use Barryvdh\Debugbar\Middleware\Debugbar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use /** @noinspection PhpUndefinedClassInspection */
+    Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -21,7 +22,16 @@ class CoachesController extends Controller
     {
         // prepare overdue meetings
 
-        $membersWithoutMeeting = DB::select(DB::raw('SELECT members.id, members.firstname FROM members INNER JOIN teams ON members.team_id = teams.id INNER JOIN users ON teams.user_id = users.id WHERE members.id NOT IN (SELECT member_id FROM meetings) AND users.id = ' . Auth::id() .' AND members.meeting_interval > 0 ORDER BY members.firstname'));
+        $membersWithoutMeeting = DB::select(DB::raw('SELECT members.id, members.firstname
+          FROM members 
+          INNER JOIN teams 
+          ON members.team_id = teams.id 
+          INNER JOIN users ON teams.user_id = users.id 
+          WHERE members.id 
+          NOT IN (SELECT member_id FROM meetings) 
+          AND users.id = ' . Auth::id() .' 
+          AND members.meeting_interval > 0 
+          ORDER BY members.firstname'));
 //        $membersWithoutMeeting = DB::select(DB::raw('SELECT members.id, members.firstname FROM members, teams, users WHERE members.id NOT IN (SELECT member_id FROM meetings) AND members.team_id = teams.id AND teams.user_id = ' . Auth::user()->id . ' AND members.meeting_interval > 0 ORDER BY members.firstname'));
 
         // Check https://github.com/laravel/framework/issues/14997
@@ -34,10 +44,14 @@ class CoachesController extends Controller
           ORDER BY overdue DESC'));
 
         // prepare upcoming dates
-        $dates = DB::select(DB::raw('SELECT meetings.id, meetings.date, members.firstname from meetings, members
-            where meetings.member_id = members.id
-            and meetings.date > NOW()
-            ORDER BY meetings.date ASC'));
+        $dates = DB::select(DB::raw('SELECT members.firstname, users.name, meetings.id, meetings.date
+            FROM members
+            INNER JOIN meetings
+            ON members.id = member_id
+            INNER JOIN users
+            ON user_id = users.id
+            WHERE meetings.date > NOW()
+            AND users.id = ' . Auth::id()));
 
         // prepare tasks
 
