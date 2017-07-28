@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Coach;
 use App\User;
-use Barryvdh\Debugbar\Middleware\Debugbar;
 use Illuminate\Http\Request;
-use /** @noinspection PhpUndefinedClassInspection */
-    Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 

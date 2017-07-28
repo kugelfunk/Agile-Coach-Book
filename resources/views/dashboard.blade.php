@@ -3,6 +3,7 @@
 @section('styles')
 <link href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" rel="stylesheet">
 @endsection
+
 @section('content')
     <div class="w-container">
         <div class="w-row">
