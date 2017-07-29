@@ -153,4 +153,9 @@ Route::get('/scheduler', function(){
     mail("mlehmann@gmx.de", "Cron call von: " . get_client_ip() , "Keine Message hier", "From: martin@martinlehmann.com");
 })->middleware('auth.basic');
 
+/**
+ * API
+ */
 
+//Route::post('/api/tasks', 'TasksController@postTask');
+Route::post('/api/tasks', 'TasksController@postTask');

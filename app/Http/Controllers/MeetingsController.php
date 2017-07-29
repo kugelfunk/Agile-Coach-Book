@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Meeting;
 use App\Member;
+use App\Team;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;

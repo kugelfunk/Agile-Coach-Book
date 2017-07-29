@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('styles')
-<link href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" rel="stylesheet">
+    <link href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -31,7 +31,9 @@
                         @foreach($dates as $date)
                             <li>
                                 <a href="/meetings/{{$date->id}}/edit">{{\Carbon\Carbon::parse($date->date)->format('d.m.Y H:i')}}
-                                    mit {{$date->firstname}}</a> <span style="float: right"><a href="/ical/{{$date->id}}"><i class="fa fa-calendar" style="color: #777;"></i></a></span>
+                                    mit {{$date->firstname}}</a> <span style="float: right"><a
+                                            href="/ical/{{$date->id}}"><i class="fa fa-calendar"
+                                                                          style="color: #777;"></i></a></span>
                             </li>
                         @endforeach
                     </ul>

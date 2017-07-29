@@ -76,6 +76,8 @@ ul {
   color: #fff;
   text-shadow: 1px 1px 6px rgba(0, 0, 0, .37), 0 1px 0 rgba(0, 0, 0, .49);
   height: 100vh;
+
+  position: relative;
 }
 
 .logo-wrapper {
@@ -313,6 +315,30 @@ th {
   align-items: center;
   color: #ffffff;
   text-shadow: 1px 1px 6px rgba(0, 0, 0, .37), 0 1px 0 rgba(0, 0, 0, .49);
+}
+
+#confirm-modal {
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1000;
+  display: none;
+  position: absolute;
+}
+
+#confirm-modal .container {
+  width: 500px;
+  text-shadow: none;
+  background-color: white;
+  color: #333;
+  padding: 20px;
+}
+
+#confirm-modal .container a {
+  color: #333;
 }
 
 @media (max-width: 991px) {

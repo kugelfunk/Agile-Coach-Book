@@ -9,6 +9,7 @@
             text-shadow: none;
             background-color: white;
         }
+
         #notes {
             text-shadow: none;
         }
@@ -36,8 +37,7 @@
                 <select name="user_id" id="user_id" class="w-select">
                     <option value="">Select...</option>
                     @foreach($users as $user)
-                        <option value="{{$user->id}}"
-                                @if($meeting->user_id == $user->id) selected @endif>{{$user->name}} {{$user->lastname}}</option>
+                        <option value="{{$user->id}}" @if($meeting->user_id == $user->id) selected @endif>{{$user->name}} {{$user->lastname}}</option>
                     @endforeach
                 </select>
                 <label for="notes">Notes</label>
@@ -46,6 +46,7 @@
             </form>
         </div>
     </div>
+    @include('partials.meeting_confirm_modal')
 @endsection
 
 @section('body_javascripts')
@@ -53,18 +54,19 @@
 
     <script src="/js/jquery.datetimepicker.min.js"></script>
     <script type="text/javascript">
+      var simplemde;
       $(document).ready(function () {
         // DateTimePicker
         $('#date').datetimepicker({
           value: "{{$meeting->date->format('d.m.Y H:i')}}",
-          format:'d.m.Y H:i',
+          format: 'd.m.Y H:i',
           minDate: new Date(Date.now()).toLocaleString(),
           step: 15,
           dayOfWeekStart: 1
         });
 
         // Text Editor
-        var simplemde = new SimpleMDE({
+        simplemde = new SimpleMDE({
           spellChecker: false,
           status: false,
           toolbar: [
@@ -75,18 +77,15 @@
             "table",
             "link",
             "preview",
+                  @if(isset($meeting->id))
             {
-              name: 'Custom',
-              action: function customFunction(editor){
-                console.log("getValue: " + editor.codemirror.getSelection());
-//                console.log("getRange: " + editor.codemirror.setBookmark());
-//                console.log("************+: ");
-//                for(var o in editor.codemirror) {
-//                  console.log(o + ": " + editor.codemirror[o]);
-//                }
+              name: 'hurz',
+              action: function hurz(editor) {
+                openTaskModal(editor.codemirror.getSelection());
               },
-              className: "fa fa-star"
+              className: "fa fa-check-square-o"
             }
+              @endif
           ]
         });
       });

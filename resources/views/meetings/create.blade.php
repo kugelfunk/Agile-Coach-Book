@@ -1,18 +1,19 @@
 @extends('layout')
 
 @section('styles')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-<link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
-<style type="text/css">
-    .editor-toolbar {
-        color: #000;
-        text-shadow: none;
-        background-color: white;
-    }
-    #notes {
-        text-shadow: none;
-    }
-</style>
+    <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <style type="text/css">
+        .editor-toolbar {
+            color: #000;
+            text-shadow: none;
+            background-color: white;
+        }
+
+        #notes {
+            text-shadow: none;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -46,17 +47,19 @@
             </form>
         </div>
     </div>
+
 @endsection
 
 @section('body_javascripts')
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-
     <script src="/js/jquery.datetimepicker.min.js"></script>
     <script type="text/javascript">
+      var simplemde;
       $(document).ready(function () {
+
         // DateTimePicker
         $('#date').datetimepicker({
-          format:'d.m.Y H:i',
+          format: 'd.m.Y H:i',
           minDate: new Date(Date.now()).toLocaleString(),
           minTime: false,
 //          maxTime: '21:00',
@@ -65,7 +68,7 @@
         });
 
         // Text Editor
-        var simplemde = new SimpleMDE({
+        simplemde = new SimpleMDE({
           spellChecker: false,
           status: false,
           toolbar: [
@@ -76,19 +79,20 @@
             "table",
             "link",
             "preview",
+                  @if(isset($meeting->id))
             {
-              name: 'Custom',
-              action: function customFunction(editor){
-                console.log("getValue: " + editor.codemirror.getSelection());
-//                console.log("getRange: " + editor.codemirror.setBookmark());
-//                console.log("************+: ");
-//                for(var o in editor.codemirror) {
-//                  console.log(o + ": " + editor.codemirror[o]);
-//                }
+              name: 'hurz',
+              action: function hurz(editor) {
+                openTaskModal(editor.codemirror.getSelection());
               },
-              className: "fa fa-star"
+              className: "fa fa-check-square-o"
             }
-          ]
+              @endif
+          ],
+          shortcuts: {
+            "toggleUnorderedList": "Cmd-Alt-K", // alter the shortcut for toggleOrderedList
+            "drawHorizontalRule": "Cmd-Alt-G"
+          }
         });
       });
     </script>

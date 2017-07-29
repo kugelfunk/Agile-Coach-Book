@@ -7,13 +7,9 @@ use phpDocumentor\Reflection\Types\Integer;
 
 class Task extends Model
 {
-    private $stuff = 12;
-    public $dude = 28;
-    public static const MY_CONSTANT = "ThisIsMyConstant";
-
-    public function coach()
+    public function user()
     {
-        return $this->belongsTo(Coach::class);
+        return $this->belongsTo(User::class);
     }
 
     public function meeting()
