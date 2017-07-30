@@ -43,6 +43,9 @@
                 <div class="card">
                     <h3>Tasks</h3>
                     <ul>
+                        @foreach($tasks as $task)
+                            <li><a href="/tasks/{{$task->id}}/edit">{{$task->title}} <span style="float: right; color: #5d6c7b">@unless(is_null($task->duedate)){{$task->duedate->format('d.m.Y')}}@endunless</span></a></li>
+                        @endforeach
 
                     </ul>
                 </div>

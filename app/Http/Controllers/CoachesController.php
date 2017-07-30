@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Task;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,8 +52,9 @@ class CoachesController extends Controller
             AND users.id = ' . Auth::id()));
 
         // prepare tasks
+        $tasks = Task::where('user_id', Auth::id())->orderBy('duedate')->get();
 
-        return view('dashboard', compact('membersWithoutMeeting', 'membersWithOverdueMeetings', 'dates'));
+        return view('dashboard', compact('membersWithoutMeeting', 'membersWithOverdueMeetings', 'dates', 'tasks'));
     }
 
     public function index()
