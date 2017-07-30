@@ -9,7 +9,7 @@
         <div class="w-row">
             <div class="w-col w-col-4">
                 <div class="card">
-                    <h3>Members without Meetings</h3>
+                    <h3><a href="/members">Members without Meetings</a></h3>
                     <ul>
                         @foreach($membersWithoutMeeting as $member)
                             <li><a href="/meetings/create?member_id={{$member->id}}">{{$member->firstname}}</a></li>
@@ -26,7 +26,7 @@
             </div>
             <div class="w-col w-col-4">
                 <div class="card">
-                    <h3>Upcoming Meetings</h3>
+                    <h3><a href="/meetings">Upcoming Meetings</a></h3>
                     <ul>
                         @foreach($dates as $date)
                             <li>
@@ -41,7 +41,7 @@
             </div>
             <div class="w-col w-col-4">
                 <div class="card">
-                    <h3>Tasks</h3>
+                    <h3><a href="/tasks">Tasks</a></h3>
                     <ul>
                         @foreach($tasks as $task)
                             <li><a href="/tasks/{{$task->id}}/edit">{{$task->title}} <span style="float: right; color: #5d6c7b">@unless(is_null($task->duedate)){{$task->duedate->format('d.m.Y')}}@endunless</span></a></li>
