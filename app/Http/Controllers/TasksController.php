@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Member;
 use App\Task;
 use App\User;
 use Carbon\Carbon;
@@ -16,6 +17,64 @@ class TasksController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $tasks = Task::where('done', false)->orderBy('duedate', 'ASC')->get();
+        $completedTasks = Task::where('done', true)->orderBy('duedate', 'ASC')->get();
+        return view('tasks.index', compact('tasks', 'completedTasks'));
+    }
+
+    public function create()
+    {
+        $users = User::orderBy('name')->get();
+        return view('tasks.create', compact('users', 'members'));
+    }
+
+    public function store()
+    {
+        $this->validate(\request(), [
+           'title' => 'required|min:2',
+           'user_id' => 'required'
+        ]);
+
+        $task = new Task();
+        $task->title = \request('title');
+        $task->duedate = empty(\request('duedate')) ? null : Carbon::parse(\request('duedate'));
+        $task->user_id = \request('user_id');
+        $task->notes = \request('notes');
+        $task->save();
+
+        return redirect('/tasks');
+    }
+
+    public function edit(Task $task)
+    {
+        $users = User::orderBy('name')->get();
+        return view('tasks.edit', compact('task', 'users'));
+    }
+
+    public function update(Task $task)
+    {
+        $this->validate(\request(), [
+            'title' => 'required|min:2',
+            'user_id' => 'required'
+        ]);
+
+
+        $task->title = \request('title');
+        $task->duedate = empty(\request('duedate')) ? null : Carbon::parse(\request('duedate'));
+        $task->user_id = \request('user_id');
+        $task->notes = \request('notes');
+        $task->update();
+
+        return redirect('/tasks');
+    }
+
+
+    /**
+     * API
+     */
+
     public function postTask(Request $request)
     {
         Log::info("Das Request Objekt: " . $request->get('title'));
@@ -26,7 +85,7 @@ class TasksController extends Controller
             $task->title = $request->get('title');
             $task->user_id = $request->get('user_id');
 
-            if($request->has('meeting_id')){
+            if ($request->has('meeting_id')) {
                 $task->meeting_id = $request->get('meeting_id');
             }
 
@@ -40,7 +99,5 @@ class TasksController extends Controller
         } else {
             return \response()->json(['error' => 'Title and Coach must be given', 'message' => 'Ick sach doch da fehlt watt'], 400);
         }
-
-
     }
 }

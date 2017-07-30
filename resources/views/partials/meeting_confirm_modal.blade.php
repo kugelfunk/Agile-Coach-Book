@@ -43,7 +43,6 @@
         $('#confirm-modal').css('display', "none");
         $('#task-confirm-form #modal-title').val('');
         $('#task-confirm-form #modal-date').val('');
-//        $('#task-confirm-form #modal-coach_id').val('')
       };
 
       $(document).ready(function () {
@@ -52,7 +51,6 @@
           format: 'd.m.Y',
           minDate: new Date(Date.now()).toLocaleString(),
           timepicker: false,
-//          maxTime: '21:00',
           dayOfWeekStart: 1
         });
 

@@ -43,7 +43,16 @@
                     <a class="w-dropdown-link" href="/meetings/create">New Meeting</a>
                 </nav>
             </div>
-            <a class="nav-link w-nav-link" href="#">Tasks</a>
+            <div class="w-dropdown" data-delay="0" data-hover="1">
+                <div class="nav-link w-dropdown-toggle">
+                    <div>Tasks</div>
+                    <div class="w-icon-dropdown-toggle"></div>
+                </div>
+                <nav class="w-dropdown-list">
+                    <a class="w-dropdown-link" href="/tasks">All Tasks</a>
+                    <a class="w-dropdown-link" href="/tasks/create">New Task</a>
+                </nav>
+            </div>
             @if (Auth::check())
                 <a class="nav-link w-nav-link" href="/logout">Logout {{Auth::user()->name}}</a>
             @else

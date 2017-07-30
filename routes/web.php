@@ -66,6 +66,22 @@ Route::get('/meetings/{meeting}/edit', 'MeetingsController@edit');
 Route::patch('/meetings/{meeting}', 'MeetingsController@update');
 
 /**
+ * TASKS
+ */
+
+Route::get('/tasks', 'TasksController@index');
+
+Route::get('/tasks/create', 'TasksController@create');
+
+Route::post('/tasks', 'TasksController@store');
+
+Route::get('/tasks/{task}/edit', 'TasksController@edit');
+
+Route::patch('/tasks/{task}', 'TasksController@update');
+
+
+
+/**
  * Authentication
  */
 

@@ -16,4 +16,6 @@ class Task extends Model
     {
         return $this->belongsTo(Meeting::class);
     }
+
+    protected $dates = ['duedate'];
 }
