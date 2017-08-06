@@ -38,6 +38,7 @@ class CoachesController extends Controller
           INNER JOIN users ON teams.user_id = users.id WHERE users.id = ' . Auth::id() . ') members, 
           (SELECT max(date) as date, member_id FROM meetings GROUP BY member_id) dates
           WHERE members.id = dates.member_id
+          AND members.meeting_interval > 0
           AND ((DATEDIFF(NOW(), dates.date)-members.meeting_interval)) > 0
           ORDER BY overdue DESC'));
 
@@ -52,7 +53,7 @@ class CoachesController extends Controller
             AND users.id = ' . Auth::id()));
 
         // prepare tasks
-        $tasks = Task::where('user_id', Auth::id())->orderBy('duedate')->get();
+        $tasks = Task::where('user_id', Auth::id())->where('done', false)->orderBy('duedate')->get();
 
         return view('dashboard', compact('membersWithoutMeeting', 'membersWithOverdueMeetings', 'dates', 'tasks'));
     }

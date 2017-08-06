@@ -36,6 +36,10 @@
                 </select>
                 <label for="notes">Notes</label>
                 <textarea name="notes" id="notes" class="w-input">{{$task->notes}}</textarea>
+                <div class="w-checkbox" style="margin: 10px 0 0 0;">
+                    <input class="w-checkbox-input" id="done" name="done" type="checkbox" @if($task->done)checked @endif>
+                    <label class="w-form-label" for="done">Task is completed</label>
+                </div>
                 <input type="submit" class="submit-button w-button" value="Submit"/>
                 <a href="{{url()->previous()}}" class="modal-cancel" style="margin-left: 10px;">Cancel</a>
             </form>
@@ -69,6 +73,7 @@
             "unordered-list",
             "table",
             "link",
+            "strikethrough",
             "preview"
           ],
           shortcuts: {

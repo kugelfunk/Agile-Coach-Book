@@ -69,6 +69,7 @@ class TasksController extends Controller
         $task->duedate = empty(\request('duedate')) ? null : Carbon::parse(\request('duedate'));
         $task->user_id = \request('user_id');
         $task->notes = \request('notes');
+        $task->done = \request()->has('done') ? true : false;
         $task->update();
 
         return redirect('/tasks');

@@ -8,7 +8,7 @@
     <div class="container">
         <div class="card">
             <h3>Tasks</h3>
-            @include('partials.tags')
+            {{--@include('partials.tags')--}}
             <table>
                 <thead>
                 <tr>
@@ -16,7 +16,7 @@
                     <th>Coach</th>
                     <th>Meeting</th>
                     <th>Due Date</th>
-                    <th>Done</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,7 +26,7 @@
                         <td>{{$task->user->name}}</td>
                         <td>@unless(is_null($task->meeting_id))<a href="/meetings/{{$task->meeting_id}}/edit">{{$task->meeting->member->firstname}}</a>@endunless</td>
                         <td>@unless(is_null($task->duedate)){{$task->duedate->format('d.m.Y')}}@endunless</td>
-                        <td><input type="checkbox" @if($task->done)checked @endif/></td>
+                        {{--<td><input type="checkbox" @if($task->done)checked @endif/></td>--}}
                     </tr>
                 @endforeach
                 </tbody>
@@ -39,7 +39,7 @@
                     <th>Coach</th>
                     <th>Member</th>
                     <th>Due Date</th>
-                    <th>Done</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,7 +49,7 @@
                         <td>{{$task->user->name}}</td>
                         <td>@unless(is_null($task->meeting_id))<a href="/meetings/{{$task->meeting_id}}/edit">{{$task->meeting->member->firstname}}</a>@endunless</td>
                         <td>@unless(is_null($task->duedate)){{$task->duedate->format('d.m.Y')}}@endunless</td>
-                        <td><input type="checkbox" @if($task->done)checked @endif/></td>
+                        {{--<td><input type="checkbox" @if($task->done)checked @endif/></td>--}}
                     </tr>
                 @endforeach
                 </tbody>

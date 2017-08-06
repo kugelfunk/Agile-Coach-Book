@@ -44,7 +44,7 @@
                     <h3><a href="/tasks">Tasks</a></h3>
                     <ul>
                         @foreach($tasks as $task)
-                            <li><a href="/tasks/{{$task->id}}/edit">{{$task->title}} <span style="float: right; color: #5d6c7b">@unless(is_null($task->duedate)){{$task->duedate->format('d.m.Y')}}@endunless</span></a></li>
+                            <li><a href="/tasks/{{$task->id}}/edit" title="{{$task->title}}">{{str_limit($task->title, 23)}} <span style="float: right; color: #5d6c7b">@unless(is_null($task->duedate)){{$task->duedate->format('d.m.y')}}@endunless</span></a></li>
                         @endforeach
 
                     </ul>
