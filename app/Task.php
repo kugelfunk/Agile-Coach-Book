@@ -17,5 +17,10 @@ class Task extends Model
         return $this->belongsTo(Meeting::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'task_tag');
+    }
+
     protected $dates = ['duedate'];
 }

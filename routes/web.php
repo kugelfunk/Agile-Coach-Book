@@ -79,7 +79,11 @@ Route::get('/tasks/{task}/edit', 'TasksController@edit');
 
 Route::patch('/tasks/{task}', 'TasksController@update');
 
+/**
+ * TAGS
+ */
 
+Route::get('/tasks/tags/{tag}', 'TagsController@index');
 
 /**
  * Authentication

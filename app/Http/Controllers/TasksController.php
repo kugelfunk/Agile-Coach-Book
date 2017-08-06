@@ -19,8 +19,12 @@ class TasksController extends Controller
 
     public function index()
     {
-        $tasks = Task::where('done', false)->orderBy('duedate', 'ASC')->get();
-        $completedTasks = Task::where('done', true)->orderBy('duedate', 'ASC')->get();
+        $tasks = Task::with(['user' => function($query){
+            $query->pluck('name');
+        }])->where('done', false)->orderBy('duedate', 'ASC')->get();
+        $completedTasks = Task::with(['user' => function($query){
+            $query->pluck('name');
+        }])->where('done', true)->orderBy('duedate', 'ASC')->get();
         return view('tasks.index', compact('tasks', 'completedTasks'));
     }
 

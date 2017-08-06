@@ -20,6 +20,7 @@ class CreateTasksTable extends Migration
             $table->date('duedate')->nullable();
             $table->integer('meeting_id')->nullable();
             $table->integer('user_id')->unsigned()->index();
+            $table->boolean('done');
             $table->timestamps();
         });
     }
