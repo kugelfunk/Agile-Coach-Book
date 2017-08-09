@@ -29,9 +29,10 @@
 <body>
 <header class="header">
     @include('partials.navbar')
-    @yield('content')
 </header>
-
+<main>
+    @yield('content')
+</main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/webflow.js"></script>

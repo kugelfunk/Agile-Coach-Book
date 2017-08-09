@@ -2,6 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="/css/tagging.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <style type="text/css">
         .editor-toolbar {
@@ -34,6 +35,8 @@
                                 @if(Auth::user()->id == $user->id) selected @endif>{{$user->name}}</option>
                     @endforeach
                 </select>
+                <label for="tags">Tags</label>
+                <div data-tags-input-name="tag" name="tags" id="tags" class="w-input">preexisting-tag, hurz, Drogen</div>
                 <label for="notes">Notes</label>
                 <textarea name="notes" id="notes" class="w-input"></textarea>
                 <input type="submit" class="submit-button w-button" value="Submit"/>
@@ -44,8 +47,9 @@
 @endsection
 
 @section('body_javascripts')
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <script src="/js/jquery.datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/js/tagging.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <script type="text/javascript">
       var simplemde;
       $(document).ready(function () {
@@ -76,6 +80,13 @@
             "drawHorizontalRule": "Cmd-Alt-G"
           }
         });
+
+        // Tags Editor
+        var taggingOptions = {
+          "edit-on-delete": false,
+          "tags-limit": 4
+        };
+        $("#tags").tagging(taggingOptions);
       });
     </script>
 @endsection
