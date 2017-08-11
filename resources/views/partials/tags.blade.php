@@ -1,5 +1,4 @@
-<ul>
-    @foreach($tags as $tag)
-        <li><a href="/tasks/tags/{{$tag}}">{{$tag}}</a></li>
-    @endforeach
-</ul>
+<a href="/tasks">All</a>,
+@foreach($tags as $tag)
+    <a href="/tasks/tags/{{$tag}}">{{$tag}}</a>@unless($loop->last), @endunless
+@endforeach

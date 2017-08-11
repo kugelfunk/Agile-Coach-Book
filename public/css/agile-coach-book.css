@@ -323,6 +323,17 @@ th {
   color: #333;
 }
 
+.select2-selection {
+  border-radius: 0 !important;
+  min-height: 38px !important;
+  padding-top: 2px;
+}
+
+.select2-container li {
+  text-shadow: none;
+  color: #333333 !important;
+}
+
 @media (max-width: 991px) {
   .navbar {
     margin-bottom: 70px;
@@ -350,16 +361,11 @@ th {
     padding-bottom: 42px;
     text-align: center;
   }
-  .center-title {
-    padding-right: 10px;
-    padding-left: 10px;
+
+  .container {
+    padding: 0 10px;
   }
-  .subtitle.location {
-    width: auto;
-    margin-right: 20%;
-    margin-bottom: 27px;
-    margin-left: 20%;
-  }
+
   .line {
     display: block;
     margin: 32px auto;
@@ -389,6 +395,7 @@ th {
     margin-bottom: 15px;
     text-align: center;
   }
+
   .form-button {
     width: 100%;
   }

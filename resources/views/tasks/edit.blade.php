@@ -15,21 +15,6 @@
             text-shadow: none;
         }
 
-        .select2-container {
-            text-shadow: none;
-            color: #333333;
-        }
-
-        .select2-selection {
-            border-radius: 0 !important;
-            min-height: 38px !important;
-            padding-top: 2px;
-        }
-
-        .select2-container li {
-            text-shadow: none;
-            color: #333333;
-        }
     </style>
 @endsection
 

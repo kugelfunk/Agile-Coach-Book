@@ -32,7 +32,8 @@ class TasksController extends Controller
     public function create()
     {
         $users = User::orderBy('name')->get();
-        return view('tasks.create', compact('users', 'members'));
+        $tags = Tag::all();
+        return view('tasks.create', compact('users', 'tags'));
     }
 
     public function store()
@@ -47,7 +48,23 @@ class TasksController extends Controller
         $task->duedate = empty(\request('duedate')) ? null : Carbon::parse(\request('duedate'));
         $task->user_id = \request('user_id');
         $task->notes = \request('notes');
+
         $task->save();
+
+        $tags = [];
+        if (\request()->has('tags')) {
+            foreach (\request('tags') as $newTag) {
+                $tag = Tag::find($newTag);
+                if ($tag == null) {
+                    $tag = new Tag();
+                    $tag->name = $newTag;
+                    $tag->save();
+                }
+                $tags[] = $tag->id;
+            }
+            $task->tags()->attach($tags);
+        }
+
 
         return redirect('/tasks');
     }
@@ -78,10 +95,7 @@ class TasksController extends Controller
                 $tags[] = $tag->id;
             }
         }
-
         $task->tags()->sync($tags);
-        // Save tags
-
 
         $task->title = \request('title');
         $task->duedate = empty(\request('duedate')) ? null : Carbon::parse(\request('duedate'));

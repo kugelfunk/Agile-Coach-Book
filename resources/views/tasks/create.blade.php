@@ -2,7 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="/css/jquery.datetimepicker.min.css">
-    <link rel="stylesheet" href="/css/tagging.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <style type="text/css">
         .editor-toolbar {
@@ -36,7 +36,11 @@
                     @endforeach
                 </select>
                 <label for="tags">Tags</label>
-                <div data-tags-input-name="tag" name="tags" id="tags" class="w-input">preexisting-tag, hurz, Drogen</div>
+                <select name="tags[]" id="tags" class="w-select" multiple="multiple">
+                    @foreach($tags as $tag)
+                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                    @endforeach
+                </select>
                 <label for="notes">Notes</label>
                 <textarea name="notes" id="notes" class="w-input"></textarea>
                 <input type="submit" class="submit-button w-button" value="Submit"/>
@@ -48,7 +52,7 @@
 
 @section('body_javascripts')
     <script src="/js/jquery.datetimepicker.min.js"></script>
-    <script type="text/javascript" src="/js/tagging.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
     <script type="text/javascript">
       var simplemde;
@@ -82,11 +86,10 @@
         });
 
         // Tags Editor
-        var taggingOptions = {
-          "edit-on-delete": false,
-          "tags-limit": 4
-        };
-        $("#tags").tagging(taggingOptions);
+        $('#tags').select2({
+          tags: true,
+          placeholder: "Select tag or add new one..."
+        });
       });
     </script>
 @endsection
