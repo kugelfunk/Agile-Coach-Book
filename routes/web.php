@@ -179,3 +179,5 @@ Route::get('/scheduler', function(){
 
 //Route::post('/api/tasks', 'TasksController@postTask');
 Route::post('/api/tasks', 'TasksController@postTask');
+
+Route::get('/api/tags', 'TagsController@getTags');

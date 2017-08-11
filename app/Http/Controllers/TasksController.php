@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Member;
+use App\Tag;
 use App\Task;
 use App\User;
 use Carbon\Carbon;
@@ -54,7 +55,8 @@ class TasksController extends Controller
     public function edit(Task $task)
     {
         $users = User::orderBy('name')->get();
-        return view('tasks.edit', compact('task', 'users'));
+        $tags = Tag::all();
+        return view('tasks.edit', compact('task', 'users', 'tags'));
     }
 
     public function update(Task $task)
@@ -63,6 +65,22 @@ class TasksController extends Controller
             'title' => 'required|min:2',
             'user_id' => 'required'
         ]);
+
+        $tags = [];
+        if (\request()->has('tags')) {
+            foreach (\request('tags') as $newTag) {
+                $tag = Tag::find($newTag);
+                if ($tag == null) {
+                    $tag = new Tag();
+                    $tag->name = $newTag;
+                    $tag->save();
+                }
+                $tags[] = $tag->id;
+            }
+        }
+
+        $task->tags()->sync($tags);
+        // Save tags
 
 
         $task->title = \request('title');

@@ -8,7 +8,7 @@
     <div class="container">
         <div class="card">
             <h3>Tasks</h3>
-            {{--@include('partials.tags')--}}
+            @include('partials.tags')
             <table>
                 <thead>
                 <tr>
