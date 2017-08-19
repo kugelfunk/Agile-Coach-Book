@@ -79,6 +79,8 @@ Route::get('/tasks/{task}/edit', 'TasksController@edit');
 
 Route::patch('/tasks/{task}', 'TasksController@update');
 
+//Route::post('/api/post_task', 'TasksContr')
+
 /**
  * TAGS
  */
@@ -177,7 +179,6 @@ Route::get('/scheduler', function(){
  * API
  */
 
-//Route::post('/api/tasks', 'TasksController@postTask');
 Route::post('/api/tasks', 'TasksController@postTask');
 
 Route::get('/api/tags', 'TagsController@getTags');

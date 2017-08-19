@@ -114,10 +114,8 @@ class TasksController extends Controller
 
     public function postTask(Request $request)
     {
-        Log::info("Das Request Objekt: " . $request->get('title'));
-
+        info($request);
         if ($request->has('title') && $request->has('user_id')) {
-//            $user = User::find($request->get('user_id'));
             $task = new Task();
             $task->title = $request->get('title');
             $task->user_id = $request->get('user_id');
@@ -129,8 +127,21 @@ class TasksController extends Controller
             if ($request->has('duedate')) {
                 $task->duedate = Carbon::parse($request->get('duedate'));
             }
-
             $task->save();
+
+            if ($request->has('tags')) {
+                $tags = [];
+                foreach ($request->get('tags') as $newTag) {
+                    $tag = Tag::find($newTag);
+                    if ($tag == null) {
+                        $tag = new Tag();
+                        $tag->name = $newTag;
+                        $tag->save();
+                    }
+                    $tags[] = $tag->id;
+                }
+                $task->tags()->attach($tags);
+            }
 
             return \response()->json(['response' => 'SUCCESS', 'msg' => 'Task was created.'], 200);
         } else {

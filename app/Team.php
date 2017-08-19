@@ -16,6 +16,11 @@ class Team extends Model
         return $this->hasMany(Member::class);
     }
 
+    public function attachments()
+    {
+        return $this->belongsToMany(Attachment::class);
+    }
+
     protected $fillable = [
         'name', 'user', 'meeting_interval',
     ];
