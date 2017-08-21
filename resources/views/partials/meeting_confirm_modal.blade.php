@@ -77,7 +77,6 @@
 
         $('#task-confirm-form').submit(function (event) {
           event.preventDefault();
-          console.log("SUBMITTEED: ");
           var task = {
             title: $('#task-confirm-form #modal-title').val(),
             duedate: $('#task-confirm-form #modal-date').val(),
@@ -86,7 +85,6 @@
             tags: $('#task-confirm-form #tags').val(),
             _token: $('#task-confirm-form').find('input[name="_token"]').val()
           };
-          console.log("Titel: " + JSON.stringify(task));
           $.ajax({
             url: '/api/tasks',
             type: "POST",
@@ -104,7 +102,6 @@
             },
             complete: function () // Clear
             {
-//              $form.trigger("reset");
             }
           });
         });

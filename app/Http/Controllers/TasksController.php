@@ -114,7 +114,17 @@ class TasksController extends Controller
 
     public function postTask(Request $request)
     {
-        info($request);
+        if ($request->file('files')) {
+            $files = request()->file('files');
+            foreach ($files as $file) {
+                $filename = $file->getClientOriginalName();
+                $extension = $file->getClientOriginalExtension();
+                info("FILE: " . $filename . " - " . $extension);
+            }
+//                $handle = $this->storeImage($file);
+//                $newsitem->thumbnail = $handle;
+        }
+        return;
         if ($request->has('title') && $request->has('user_id')) {
             $task = new Task();
             $task->title = $request->get('title');
@@ -127,8 +137,9 @@ class TasksController extends Controller
             if ($request->has('duedate')) {
                 $task->duedate = Carbon::parse($request->get('duedate'));
             }
-            $task->save();
+//            $task->save();
 
+            /*
             if ($request->has('tags')) {
                 $tags = [];
                 foreach ($request->get('tags') as $newTag) {
@@ -142,10 +153,42 @@ class TasksController extends Controller
                 }
                 $task->tags()->attach($tags);
             }
+            */
 
-            return \response()->json(['response' => 'SUCCESS', 'msg' => 'Task was created.'], 200);
+            if ($request->file('files[]')) {
+                $files = request()->file('files');
+                foreach ($files as $file) {
+                    $filename = $file->getClientOriginalName();
+                    $extension = $file->getClientOriginalExtension();
+                    info("FILE: " . $filename . " - " . $extension);
+                }
+//                $handle = $this->storeImage($file);
+//                $newsitem->thumbnail = $handle;
+            }
+            info("TASK: " . $task);
+
+
+                return \response()->json(['response' => 'SUCCESS', 'msg' => 'Task was created.'], 200);
         } else {
             return \response()->json(['error' => 'Title and Coach must be given', 'message' => 'Ick sach doch da fehlt watt'], 400);
         }
+    }
+
+    private function storeImage($file)
+    {
+        $img = Image::make($file->getRealPath());
+
+        $handle = str_slug(basename($file->getClientOriginalName(), '.'.$file->getClientOriginalExtension())) . "_" . str_random(8);
+
+        $path = public_path('/uploads/' . $handle . '.jpg');
+        $img->save($path);
+
+        // Fit 296px x 150px for news index page
+        $path = public_path('/uploads/' . $handle . '_thumbnail.jpg');
+        $img->fit(296, 150, function ($constraint) {
+            $constraint->upsize();
+        })->save($path);
+
+        return $handle;
     }
 }
