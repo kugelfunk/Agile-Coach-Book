@@ -50,7 +50,8 @@ class CoachesController extends Controller
             INNER JOIN users
             ON user_id = users.id
             WHERE meetings.date > NOW()
-            AND users.id = ' . Auth::id()));
+            AND users.id = ' . Auth::id() .'
+            ORDER BY meetings.date'));
 
         // prepare tasks
         $tasks = Task::where('user_id', Auth::id())->where('done', false)->orderBy('duedate')->get();
