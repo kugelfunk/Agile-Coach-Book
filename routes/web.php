@@ -181,4 +181,15 @@ Route::get('/scheduler', function(){
 
 Route::post('/api/tasks', 'TasksController@postTask');
 
+Route::patch('/api/tasks/{task}', 'TasksController@updateTask');
+
 Route::get('/api/tags', 'TagsController@getTags');
+
+/**
+ * Attachments
+ */
+Route::get('/attachments/{attachment_url}', [
+    'as'         => 'attachments.show',
+    'uses'       => 'AttachmentsController@show',
+    'middleware' => 'auth',
+]);
