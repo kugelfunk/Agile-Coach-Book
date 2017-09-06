@@ -118,7 +118,7 @@
         // Tags Editor
         $('#tags').select2({
           tags: true,
-          placeholder: "Such dir was aus..."
+          placeholder: "Select tag or add new one..."
         });
       });
     </script>

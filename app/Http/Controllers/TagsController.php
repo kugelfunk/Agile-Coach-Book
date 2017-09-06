@@ -15,7 +15,11 @@ class TagsController extends Controller
 
         //refactor this:
 //        $tags = Tag::has('tasks')->pluck('name');
-        return view('tasks.index', compact('tasks', 'completedTasks'));
+        $tags = Tag::has('tasks')->pluck('name');
+
+        $currentTag = $tag->name;
+
+        return view('tasks.index', compact('tasks', 'completedTasks', 'tags', 'currentTag'));
     }
 
     public function getTags()

@@ -7,9 +7,20 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <h3>Tasks</h3>
-            @include('partials.tags')
-            <table>
+            <h3 style="float: left">Tasks</h3>
+            <div class="dropdown w-dropdown" data-delay="0" data-hover="1" style="float: right; margin-top: -10px;">
+                <div class="dropdown-toggle w-dropdown-toggle">
+                    <div>{{isset($currentTag) ? $currentTag : 'Tag Filter'}}</div>
+                    <div class="w-icon-dropdown-toggle"></div>
+                </div>
+                <nav class="w-dropdown-list">
+                    <a class="w-dropdown-link" href="/tasks">All</a>
+                    @foreach($tags as $tag)
+                        <a class="w-dropdown-link" href="/tasks/tags/{{$tag}}">{{$tag}}</a>
+                    @endforeach
+                </nav>
+            </div>
+            <table style="clear: both">
                 <thead>
                 <tr>
                     <th>Title</th>
