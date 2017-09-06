@@ -408,6 +408,10 @@ th {
   margin-bottom: 10px;
 }
 
+.w-nav-brand {
+  margin-top: 18px;
+}
+
 .xdsoft_datetimepicker {
   text-shadow: none;
 }

@@ -140,7 +140,7 @@
         evt.stopPropagation();
         evt.preventDefault();
         evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
-        $('#dropzone').css('backgroundColor', 'red');
+        $('#dropzone').css('backgroundColor', 'rgba(255,255,255,0.3)');
       }
 
       function handleDragOut(evt) {

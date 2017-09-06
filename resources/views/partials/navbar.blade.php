@@ -1,6 +1,6 @@
 <div class="navbar w-nav" data-animation="over-right" data-collapse="medium" data-duration="400">
     <div class="w-container">
-        <a class="w-nav-brand" href="/">Turbine Kreuzberg</a>
+        <a class="w-nav-brand" href="/"><img src="/images/turbine-logo.png" alt="Turbine Kreuzberg Agile Coach App"></a>
         <nav class="nav-menu w-nav-menu" role="navigation">
             <a class="nav-link w-nav-link" href="/">Home</a>
             <div class="w-dropdown" data-delay="0" data-hover="1">
