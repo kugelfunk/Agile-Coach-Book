@@ -334,6 +334,79 @@ th {
   color: #333333 !important;
 }
 
+.select2-container {
+  margin-bottom: 10px !important;
+}
+
+#file-btn {
+  display: none;
+}
+
+.attachments {
+  width: 100%;
+  min-height: 38px;
+  background-color: white;
+  display: none;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.file-upload {
+  min-height: 38px;
+  width: 100%;
+  margin: 0 auto 10px auto;
+  box-sizing: border-box;
+  border: dashed thick #ddd;
+  border-radius: 14px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.file-upload .file-upload-caption {
+  color: #ddd;
+  text-shadow: none;
+  cursor: pointer;
+}
+
+#img-list {
+  width: 100%;
+}
+
+.file-box {
+  width: 32.8%;
+  padding: 5px;
+  margin: 0;
+  text-align: center;
+  display: inline-block;
+
+}
+
+.file-thumb {
+  width: 100%;
+}
+
+.thumb-caption {
+  width: 100%;
+  display: block;
+  margin-top: 2px;
+  font-size: 10px;
+  line-height: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  float: left;
+}
+
+.attachments .thumb-caption {
+  color: #000;
+  text-shadow: none;
+}
+
+.CodeMirror-wrap {
+  margin-bottom: 10px;
+}
+
 @media (max-width: 991px) {
   .navbar {
     margin-bottom: 70px;

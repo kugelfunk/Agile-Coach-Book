@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Meeting;
 use App\Member;
 use App\Team;
+use App\Tag;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -27,8 +28,9 @@ class MeetingsController extends Controller
     {
         $members = Member::all();
         $users = User::all();
+        $tags = Tag::all();
 
-        return view('meetings.create', compact('members', 'users'));
+        return view('meetings.create', compact('members', 'users', 'tags'));
     }
 
     public function store()
@@ -55,7 +57,8 @@ class MeetingsController extends Controller
     {
         $users = \App\User::all();
         $members = Member::all();
-        return view('meetings.edit', compact('meeting', 'users', 'members'));
+        $tags = Tag::all();
+        return view('meetings.edit', compact('meeting', 'users', 'members', 'tags'));
     }
 
     public function update(Meeting $meeting)
