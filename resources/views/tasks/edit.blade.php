@@ -51,7 +51,14 @@
                 <label for="attachments">Attachments</label>
                 <div class="attachments" @if($task->attachments->count() > 0) style="display:block;" @endif>
                     @foreach($task->attachments as $attachment)
-                        <div class="file-box" style="position: relative; text-align: center"><img class="file-thumb" src="{{$attachment->filetype == 'image' ? '/attachments/'.$attachment->handle . '_thumbnail.' . $attachment->extension : '/images/file_icon.png'}}"><span class="thumb-caption" style="">{{$attachment->handle . '.' . $attachment->extension}}</span></div>
+                        <a href="{{'/attachments/'.$attachment->handle . '.' . $attachment->extension}}" target="_blank">
+                            <div class="file-box" style="position: relative; text-align: center">
+                                <div class="delete-btn" data-attachment_id="{{$attachment->id}}">X</div>
+                                <img class="file-thumb" src="{{$attachment->filetype == 'image' ? '/attachments/'.$attachment->handle . '_thumbnail.' . $attachment->extension : '/images/file_icon.png'}}">
+                                <span class="thumb-caption" style="">{{$attachment->handle . '.' . $attachment->extension}}</span>
+                            </div>
+                        </a>
+
                     @endforeach
                 </div>
                 <div class="file-upload" id="dropzone">
@@ -118,14 +125,26 @@
     <script type="text/javascript">
 
       var uploadFiles = [];
+      
+      var removedAttachments = [];
 
       var MAX_FILE_SIZE = 1000;
 
       $(document).ready(function () {
+        $('.delete-btn').click(function(evt) {
+          evt.preventDefault();
+          evt.stopImmediatePropagation();
+          removedAttachments.push($(this).data('attachment_id'));
+          $(this).parent().hide('fast', function() {
+            $(this).parent().remove()
+          });
+        });
+        
         $('#task-confirm-form').submit(function (evt) {
           evt.preventDefault();
           var formData = new FormData($("#task-confirm-form")[0]);
           formData.append('_method', 'PATCH');
+          formData.append('removedAttachments', JSON.stringify(removedAttachments));
           for(var i = 0; i < uploadFiles.length; i++) {
             formData.append('files[]', uploadFiles[i]);
           }
@@ -145,10 +164,10 @@
             processData: false,
             success: function (data) {
               console.log("Success response: " + data.response);
-//              window.location.href = "/tasks";
+              window.location.href = "/tasks";
             },
-            error: function(data) {
-              console.log("ERROR Response: " + data.response);
+            error: function(xhr, status, error) {
+              console.log("ERROR Response: " + xhr.response);
             }
           });
         });
@@ -162,7 +181,6 @@
       }
 
       function handleDragOut(evt) {
-        console.log("DRAGOUT: ");
         $('#dropzone').css('backgroundColor', 'transparent');
       }
 
@@ -176,7 +194,7 @@
           uploadFiles.push(f);
           var filesize = Math.round(f.size / 1024);
           if(filesize > MAX_FILE_SIZE) {
-            alert("Filesize of " + f.name + " is " + filesize + ". That is too big. Max 100 kB please");
+            alert("Filesize of " + f.name + " is " + filesize + ". That is too big. Max 1 MB please");
             continue;
           }
           if (f.type.match('image.*')) {
@@ -185,9 +203,7 @@
 
             reader.onload = (function (theFile) {
               return function (evt) {
-                console.log("IN ONLOAD return: ");
                 imgContainer = $('<div class="file-box"><img class="file-thumb" src="' + evt.target.result + '"><span class="thumb-caption" style="">' + Math.round(theFile.size/1024) + '</span></div>');
-                console.log("IMG CONTAINER: " + imgContainer);
                 $('#img-list').append(imgContainer);
               }
             })(f);
@@ -210,7 +226,7 @@
         for (var i = 0, f; f = files[i]; i++) {
           var filesize = Math.round(f.size / 1024);
           if(filesize > MAX_FILE_SIZE) {
-            alert("Filesize of " + f.name + " is " + filesize + ". That is too big. Max 100 kB please");
+            alert("Filesize of " + f.name + " is " + filesize + ". That is too big. Max 1 MB please");
             continue;
           }
           if (f.type.match('image.*')) {
@@ -219,9 +235,7 @@
 
             reader.onload = (function (theFile) {
               return function (evt) {
-                console.log("IN ONLOAD return: ");
                 imgContainer = $('<div class="file-box"><img class="file-thumb" src="' + evt.target.result + '"><span class="thumb-caption" style="">' + theFile.name + '</span></div>');
-                console.log("IMG CONTAINER: " + imgContainer);
                 $('#img-list').append(imgContainer);
               }
             })(f);

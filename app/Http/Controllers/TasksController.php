@@ -10,6 +10,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -158,7 +159,6 @@ class TasksController extends Controller
                     $task->attachments()->attach($fileId);
                 }
             }
-            info("TASK: " . $task);
 
             return \response()->json(['response' => 'SUCCESS', 'msg' => 'Task was created.'], 200);
         } else {
@@ -176,7 +176,6 @@ class TasksController extends Controller
 
         if (request()->has('title') && request()->has('user_id')) {
 
-            info("NOTES: " . \request('notes'));
             $tags = [];
             if (\request()->has('tags')) {
                 foreach (\request('tags') as $newTag) {
@@ -198,6 +197,13 @@ class TasksController extends Controller
             $task->done = \request()->has('done') ? true : false;
             $task->update();
 
+            if (null !== (\request('removedAttachments'))) {
+                $removedAttachments = json_decode(\request('removedAttachments'));
+                if (sizeof($removedAttachments) > 0) {
+                    DB::table('attachment_task')->whereIn('attachment_id', $removedAttachments)->delete();
+                }
+            }
+
             if (request()->file('files')) {
                 $files = request()->file('files');
                 foreach ($files as $file) {
@@ -205,7 +211,6 @@ class TasksController extends Controller
                     $task->attachments()->attach($fileId);
                 }
             }
-            info("TASK: " . $task);
 
             return \response()->json(['response' => 'SUCCESS', 'msg' => 'Task was updated.'], 200);
         } else {
@@ -218,7 +223,12 @@ class TasksController extends Controller
         $handle = str_slug(basename($file->getClientOriginalName(), '.' . $file->getClientOriginalExtension())) . "_" . str_random(8);
         $extension = $file->getClientOriginalExtension();
         $filetype = '';
-        $mimetype = File::mimeType($file);
+
+        try{
+            $mimetype = File::mimeType($file);
+        } catch (\Exception $e) {
+
+        }
 
         if (str_contains($mimetype, 'image')) {
             $img = Image::make($file->getRealPath());
