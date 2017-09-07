@@ -20,7 +20,7 @@ class MeetingsController extends Controller
     public function index()
     {
         $meetings = Meeting::whereDate('date', '>=', date('Y-m-d'))->orderBy('date', 'asc')->get();
-        $oldMeetings = Meeting::whereDate('date', '<', date('Y-m-d'))->orderBy('date', 'asc')->get();
+        $oldMeetings = Meeting::whereDate('date', '<', date('Y-m-d'))->orderBy('date', 'desc')->get();
         return view('meetings.index', compact('meetings', 'oldMeetings'));
     }
 

@@ -69,6 +69,14 @@ ul {
   padding-left: 0;
 }
 
+table {
+  width: 100%;
+}
+
+tbody tr:nth-of-type(odd){
+  background: #fafafa;
+}
+
 .header {
   position: relative;
 }
@@ -270,7 +278,9 @@ th {
 }
 
 .card .w-dropdown-list {
-  background-color: #e6e6e6;
+  background-color: #ffffff;
+  border: 1px solid #333333;
+  box-shadow: 3px 3px 0 #aaaaaa;
 }
 
 .card .w-dropdown-link.w--current {
