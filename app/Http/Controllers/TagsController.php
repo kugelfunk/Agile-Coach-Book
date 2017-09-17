@@ -11,11 +11,9 @@ class TagsController extends Controller
     public function index(Tag $tag)
     {
 //        $tag = Tag::with('tasks')->where('id', $tag->id)->get();
-        $tasks = $tag->tasks->where('done', false);
-        $completedTasks = $tag->tasks->where('done', true);
+        $tasks = $tag->tasks()->where('done', false)->orderBy('duedate', 'asc')->get();
+        $completedTasks = $tag->tasks()->where('done', true)->orderBy('duedate', 'asc')->get();
 
-        //refactor this:
-//        $tags = Tag::has('tasks')->pluck('name');
         $tags = Tag::has('tasks')->pluck('name');
         $coaches = User::all();
 
