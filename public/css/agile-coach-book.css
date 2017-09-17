@@ -451,6 +451,20 @@ th {
   font-weight: bold;
 }
 
+.tabs-menu {
+  margin-bottom: 30px;
+}
+
+.tab-link {
+  background-color: hsla(0, 0%, 100%, .16);
+  color: #fff;
+  text-shadow: 0 0 3px rgba(0, 0, 0, .75);
+}
+
+.tab-link.w--current {
+  background-color: hsla(0, 0%, 100%, .27);
+}
+
 @media (max-width: 991px) {
   .navbar {
     margin-bottom: 70px;
