@@ -44,6 +44,7 @@
                 <label for="notes">Notes</label>
                 <textarea name="notes" id="notes" class="w-input"></textarea>
                 <input class="submit-button w-button" type="submit" value="Submit">
+                <a href="{{url()->previous()}}" class="modal-cancel" style="margin-left: 10px;">Cancel</a>
             </form>
         </div>
     </div>

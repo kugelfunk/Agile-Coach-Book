@@ -9,6 +9,7 @@ use App\Tag;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\URL;
 
 class MeetingsController extends Controller
 {
@@ -26,6 +27,7 @@ class MeetingsController extends Controller
 
     public function create()
     {
+        session(['url.intended' => URL::previous()]);
         $members = Member::all();
         $users = User::all();
         $tags = Tag::all();
@@ -50,11 +52,12 @@ class MeetingsController extends Controller
         $meeting->notes = \request('notes');
         $meeting->save();
 
-        return redirect('/meetings');
+        return redirect()->intended('MeetingsController@index');
     }
 
     public function edit(Meeting $meeting)
     {
+        session(['url.intended' => URL::previous()]);
         $users = \App\User::all();
         $members = Member::all();
         $tags = Tag::all();
@@ -75,7 +78,7 @@ class MeetingsController extends Controller
         $meeting->notes = \request('notes');
         $meeting->update();
 
-        return redirect('/meetings');
-
+//        return redirect('/meetings');
+        return redirect()->intended('MeetingsController@index');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Meeting;
 use App\Member;
 use App\Team;
 use Illuminate\Http\Request;
@@ -54,7 +55,9 @@ class MembersController extends Controller
     public function edit(Member $member)
     {
         $teams = Team::all();
-        return view('members.edit', compact('member', 'teams'));
+        $meetings = Meeting::where('member_id', $member->id)->orderBy('date', 'desc')->get();
+
+        return view('members.edit', compact('member', 'teams', 'meetings'));
     }
 
     public function update(Member $member)

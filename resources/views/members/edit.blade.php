@@ -1,15 +1,19 @@
 @extends('layout')
 
+@section('styles')
+    <link href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" rel="stylesheet">
+@endsection
+
 @section('content')
     <div class="container">
         <!-- START CONTAINER INNER -->
 
         <div class="w-tabs" data-duration-in="300" data-duration-out="100">
             <div class="tabs-menu w-tab-menu">
-                <a class="tab-link w--current w-inline-block w-tab-link" data-w-tab="Basics">
-                    <div class="text-block-3">Basics</div>
-                </a><a class="tab-link w-inline-block w-tab-link" data-w-tab="Meetings">
-                    <div>Meetings</div>
+                <a class="tab-link w--current w-inline-block w-tab-link" data-w-tab="Meetings">
+                    <div>{{$member->firstname}}'s Meetings</div>
+                </a><a class="tab-link w-inline-block w-tab-link" data-w-tab="Basics">
+                    <div class="text-block-3">Personal Details</div>
                 </a>
             </div>
             <div class="w-tab-content">
@@ -59,14 +63,24 @@
                     </div>
                     <!-- END BASICS FORM -->
                 </div>
-                <div class="w--tab-active w-tab-pane" data-w-tab="Meetings"><h3>Hello meetings!</h3></div>
+                <div class="w-tab-pane" data-w-tab="Meetings">
+                    @foreach($meetings as $meeting)
+                        <label><a href="/meetings/{{$meeting->id}}/edit">{{$meeting->date->format('d.m.Y')}}
+                                with {{$meeting->user->name}} <i class="fa fa-edit" style="color: #eee;"></i></a></label>
+                        <div class="notes-box">
+                            @unless(empty($meeting->notes))
+                                {!!\GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($meeting->notes)!!}
+                            @else
+                                <span class="no-notes"><a href="/meetings/{{$meeting->id}}/edit">Add meeting notes...</a></span>
+                            @endunless
+                        </div>
+                    @endforeach
+                    <div style="margin-top: 10px;">
+                    <a href="/meetings/create?member_id={{$member->id}}" style="font-weight: bold;">New Meeting <i class="fa fa-edit" style="color: #eee;"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
-
-
-        <!-- ALTER CONTENT -->
-
-        <!-- END CONTAINER INNER -->
     </div>
 @endsection
 

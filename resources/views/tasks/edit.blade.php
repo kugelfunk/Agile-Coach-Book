@@ -36,17 +36,16 @@
                 <label for="user_id">Coach</label>
                 <select class="w-select" name="user_id" id="user_id">
                     @foreach($users as $user)
-                        <option value="{{$user->id}}"
-                                @if($task->user_id == $user->id) selected @endif>{{$user->name}}</option>
+                        <option value="{{$user->id}}" @if($task->user_id == $user->id) selected @endif>{{$user->name}}</option>
                     @endforeach
                 </select>
-                <label for="tags">Tags</label>
+                <label for="tags">Tags:</label>
                 <select name="tags[]" id="tags" class="w-select" multiple="multiple">
                     @foreach($tags as $tag)
                         <option value="{{$tag->id}}" @if(in_array($tag->name, $task->tags->pluck('name')->all()))selected @endif>{{$tag->name}}</option>
                     @endforeach
                 </select>
-                <label for="notes">Notes</label>
+                <label for="notes">Notes:</label>
                 <textarea name="notes" id="notes" class="w-input">{{$task->notes}}</textarea>
                 <label for="attachments">Attachments</label>
                 <div class="attachments" @if($task->attachments->count() > 0) style="display:block;" @endif>
@@ -125,7 +124,7 @@
     <script type="text/javascript">
 
       var uploadFiles = [];
-      
+
       var removedAttachments = [];
 
       var MAX_FILE_SIZE = 1000;
@@ -139,7 +138,7 @@
             $(this).parent().remove()
           });
         });
-        
+
         $('#task-confirm-form').submit(function (evt) {
           evt.preventDefault();
           var formData = new FormData($("#task-confirm-form")[0]);

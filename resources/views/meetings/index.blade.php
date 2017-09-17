@@ -15,8 +15,8 @@
                 </thead>
                 <tbody>
                 @foreach($meetings as $meeting)
-                    <tr onclick="location.href='/meetings/{{$meeting->id}}/edit'">
-                        <td><a href="/meetings/{{$meeting->id}}/edit">{{$meeting->member->firstname}}</a></td>
+                    <tr onclick="location.href='/meetings/{{$meeting->id}}/edit'" style="cursor: pointer">
+                        <td><a href="/members/{{$meeting->member_id}}/edit">{{$meeting->member->firstname}}</a></td>
                         <td>{{$meeting->user->name}}</td>
                         <td>{{$meeting->date->format('d.m.Y, H:i')}}</td>
                         <td><a href="/ical/{{$meeting->id}}">iCal</a></td>
@@ -35,8 +35,8 @@
                 </thead>
                 <tbody>
                 @foreach($oldMeetings as $meeting)
-                    <tr onclick="location.href='/meetings/{{$meeting->id}}/edit'">
-                        <td><a href="/meetings/{{$meeting->id}}/edit">{{$meeting->member->firstname}}</a></td>
+                    <tr onclick="location.href='/meetings/{{$meeting->id}}/edit'" style="cursor: pointer">
+                        <td><a href="/members/{{$meeting->member_id}}/edit">{{$meeting->member->firstname}}</a></td>
                         <td>{{$meeting->user->name}}</td>
                         <td>{{$meeting->date->format('d.m.Y, H:i')}}</td>
                     </tr>
