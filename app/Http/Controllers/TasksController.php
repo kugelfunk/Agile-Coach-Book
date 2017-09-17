@@ -27,15 +27,26 @@ class TasksController extends Controller
     {
         $tasks = Task::with(['user' => function ($query) {
             $query->pluck('name');
-        }])->where('done', false)->orderBy('duedate', 'ASC')->get();
+        }])->where('done', false)->orderBy('duedate', 'ASC');
 
         $completedTasks = Task::with(['user' => function ($query) {
             $query->pluck('name');
-        }])->where('done', true)->orderBy('duedate', 'ASC')->get();
+        }])->where('done', true)->orderBy('duedate', 'ASC');
 
         $tags = Tag::has('tasks')->pluck('name');
+        $coaches = User::all();
 
-        return view('tasks.index', compact('tasks', 'completedTasks', 'tags'));
+        if (\request()->has('coach')) {
+            $user_id = \request('coach');
+            $tasks->where('user_id', $user_id);
+            $completedTasks->where('user_id', $user_id);
+            $currentFilter = User::find($user_id)->name;
+        }
+
+        $tasks = $tasks->get();
+        $completedTasks = $completedTasks->get();
+
+        return view('tasks.index', compact('tasks', 'completedTasks', 'tags', 'coaches', 'currentFilter'));
     }
 
     public function create()
@@ -114,6 +125,20 @@ class TasksController extends Controller
         $task->update();
 
         return redirect('/tasks');
+    }
+
+    public function check(Task $task)
+    {
+        $task->done = 1;
+        $task->update();
+        return back();
+    }
+
+    public function uncheck(Task $task)
+    {
+        $task->done = 0;
+        $task->update();
+        return back();
     }
 
 

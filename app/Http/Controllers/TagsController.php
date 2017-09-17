@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use App\User;
 use Illuminate\Http\Request;
 
 class TagsController extends Controller
@@ -16,10 +17,11 @@ class TagsController extends Controller
         //refactor this:
 //        $tags = Tag::has('tasks')->pluck('name');
         $tags = Tag::has('tasks')->pluck('name');
+        $coaches = User::all();
 
-        $currentTag = $tag->name;
+        $currentFilter = $tag->name;
 
-        return view('tasks.index', compact('tasks', 'completedTasks', 'tags', 'currentTag'));
+        return view('tasks.index', compact('tasks', 'completedTasks', 'tags', 'coaches', 'currentFilter'));
     }
 
     public function getTags()

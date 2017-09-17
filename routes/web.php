@@ -79,7 +79,9 @@ Route::get('/tasks/{task}/edit', 'TasksController@edit');
 
 Route::patch('/tasks/{task}', 'TasksController@update');
 
-//Route::post('/api/post_task', 'TasksContr')
+Route::get('/tasks/{task}/check', 'TasksController@check');
+
+Route::get('/tasks/{task}/uncheck', 'TasksController@uncheck');
 
 /**
  * TAGS

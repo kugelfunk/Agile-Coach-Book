@@ -9,6 +9,11 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public static function all($columns = ['*'])
+    {
+        return User::where('name', '!=', 'cronjob')->get();
+    }
+
     public function teams()
     {
         return $this->hasMany(Team::class);
