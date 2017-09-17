@@ -61,7 +61,7 @@ class CoachesController extends Controller
 
     public function index()
     {
-        $coaches = User::orderBy('name')->get();
+        $coaches = User::where('name', '!=', 'cronjob')->orderBy('name')->get();
 
         return view('coaches.index', compact('coaches'));
     }

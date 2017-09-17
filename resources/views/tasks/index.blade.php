@@ -53,7 +53,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Coach</th>
-                    <th>Member</th>
+                    <th>Meeting</th>
                     <th>Due Date</th>
                     <th></th>
                 </tr>

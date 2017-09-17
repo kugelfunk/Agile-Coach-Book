@@ -9,7 +9,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Coach</th>
-                    <th>Members</th>
+                    <th style="text-align: center">Members</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -17,7 +17,7 @@
                     <tr>
                         <td><a href="/teams/{{$team->id}}/edit">{{$team->name}}</a></td>
                         <td>@unless(empty($team->user)){{$team->user->name}}@endunless</td>
-                        <td style="text-align: center">@unless(empty($team->members)){{$team->members->count()}}@endunless</td>
+                        <td style="text-align: center">@unless(empty($team->members))<a href="/members?team_id={{$team->id}}">{{$team->members->count()}}</a>@endunless</td>
                     </tr>
                 @endforeach
                 </tbody>
