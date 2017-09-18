@@ -28,7 +28,7 @@ class MeetingsController extends Controller
     public function create()
     {
         session(['url.intended' => URL::previous()]);
-        $members = Member::all();
+        $members = Member::orderBy('firstname')->get();
         $users = User::all();
         $tags = Tag::all();
 
@@ -59,7 +59,7 @@ class MeetingsController extends Controller
     {
         session(['url.intended' => URL::previous()]);
         $users = \App\User::all();
-        $members = Member::all();
+        $members = Member::orderBy('firstname')->get();
         $tags = Tag::all();
         return view('meetings.edit', compact('meeting', 'users', 'members', 'tags'));
     }

@@ -31,7 +31,7 @@
                 <select name="member_id" id="member_id" class="w-select">
                     <option value="">Select...</option>
                     @foreach($members as $member)
-                        <option value="{{$member->id}}" @if($meeting->member_id == $member->id) selected @endif>{{$member->firstname}}</option>
+                        <option value="{{$member->id}}" @if($meeting->member_id == $member->id) selected @endif>{{$member->firstname}} {{$member->lastname}}</option>
                     @endforeach
                 </select>
                 <label for="user_id">Coach:</label>

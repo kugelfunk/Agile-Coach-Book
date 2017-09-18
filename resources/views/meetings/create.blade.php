@@ -30,7 +30,7 @@
                     <option value="">Select...</option>
                     @foreach($members as $member)
                         <option value="{{$member->id}}"
-                                @if(request('member_id') == $member->id) selected @endif>{{$member->firstname}}</option>
+                                @if(request('member_id') == $member->id) selected @endif>{{$member->firstname}} {{$member->lastname}}</option>
                     @endforeach
                 </select>
                 <label for="user_id">Coach:</label>
