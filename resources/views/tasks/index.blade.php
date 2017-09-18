@@ -40,7 +40,7 @@
                     <tr>
                         <td><a href="/tasks/{{$task->id}}/edit">{{$task->title}}</a></td>
                         <td>{{$task->user->name}}</td>
-                        <td>@unless(is_null($task->meeting_id))<a href="/meetings/{{$task->meeting_id}}/edit">{{$task->meeting->member->firstname}}</a>@endunless</td>
+                        <td>@unless(is_null($task->meeting))<a href="/meetings/{{$task->meeting_id}}/edit">{{$task->meeting->member->firstname}}</a>@endunless</td>
                         <td>@unless(is_null($task->duedate)){{$task->duedate->format('d.m.Y')}}@endunless</td>
                         <td><a href="/tasks/{{$task->id}}/check"><i class="fa fa-square-o" style="color: #777;"></i></a></td>
                     </tr>
