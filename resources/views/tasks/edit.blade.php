@@ -88,7 +88,7 @@
         // DateTimePicker
         $('#duedate').datetimepicker({
           format: 'd.m.Y',
-          minDate: new Date(Date.now()).toLocaleString(),
+//          minDate: new Date(Date.now()).toLocaleString(),
           timepicker: false,
           dayOfWeekStart: 1
         });

@@ -61,7 +61,7 @@
         // DateTimePicker
         $('#date').datetimepicker({
           format: 'd.m.Y H:i',
-          minDate: new Date(Date.now()).toLocaleString(),
+//          minDate: new Date(Date.now()).toLocaleString(),
           minTime: false,
 //          maxTime: '21:00',
           step: 15,

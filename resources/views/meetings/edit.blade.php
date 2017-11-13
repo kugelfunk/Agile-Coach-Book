@@ -62,7 +62,7 @@
         $('#date').datetimepicker({
           value: "{{$meeting->date->format('d.m.Y H:i')}}",
           format: 'd.m.Y H:i',
-          minDate: new Date(Date.now()).toLocaleString(),
+//          minDate: new Date(Date.now()).toLocaleString(),
           step: 15,
           dayOfWeekStart: 1
         });
