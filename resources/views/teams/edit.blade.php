@@ -53,6 +53,7 @@
                 <textarea name="notes" id="notes" rows="5" class="w-input">{{$team->notes}}</textarea>
                 <input class="submit-button w-button" type="submit" value="Submit">
                 <a href="{{url()->previous()}}" class="modal-cancel" style="margin-left: 10px;">Cancel</a>
+                <a href="/members?team_id={{$team->id}}" class="modal-cancel" style="margin-left: 10px;">Show Team Members</a>
             </form>
         </div>
     </div>
