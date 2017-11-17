@@ -27,7 +27,7 @@
                 <tbody>
                 @foreach($members as $member)
                     <tr>
-                        <td><a href="/members/{{$member->id}}/edit">{{$member->firstname}}</a></td>
+                        <td><a href="/members/{{$member->id}}/edit" title="{{$member->firstname}} {{$member->lastname}}">{{$member->firstname}} {{$member->lastname[0]}}.</a></td>
                         <td>@unless(empty($member->team))<a href="/teams/{{$member->team_id}}/edit">{{$member->team->name}}</a>@endunless</td>
                         <td style="text-align: center">@unless(empty($member->meetings))<a href="/members/{{$member->id}}/edit">{{$member->meetings->count()}}</a>@endunless</td>
                     </tr>
