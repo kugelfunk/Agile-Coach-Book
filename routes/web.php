@@ -1,5 +1,8 @@
 <?php
 
+use App\User;
+use Illuminate\Support\Facades\Mail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -195,3 +198,20 @@ Route::get('/attachments/{attachment_url}', [
     'uses'       => 'AttachmentsController@show',
     'middleware' => 'auth',
 ]);
+
+/**
+ * Cron Jobs
+ */
+Route::get('/cron_daily', 'CronController@daily');
+
+Route::get('/cron_weekly', 'CronController@weekly');
+
+Route::get('/weekly', function(){
+//    $coachIds = User::where('name', '!=', 'cronjob')->pluck('id');
+    $coaches = User::where('name', '=', 'Martin')->get();
+    \Illuminate\Support\Facades\Log::info("Coaches ist " . $coaches);
+    foreach ($coaches as $coach) {
+        \Illuminate\Support\Facades\Log::info("Mail wird verschickt für " . $coach->email);
+        Mail::to($coach->email)->queue(new \App\Mail\WeeklyUpdate($coach->id));
+    }
+});
